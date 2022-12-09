@@ -46,8 +46,11 @@ uplati sredstva sa kartice na svoj on-line racun.
 Test platna kartica:
 
   Broj: 4242 4242 4242 4242 
-  Ime: <Ime Korisnika>
+
+  Ime: \<Ime Korisnika\>
+
   Datum isteka kartice: 02/23
+
   Sigurnosni kod: 123
 
 Korisnik inicira transakciju drugom korisniku unoseci podatke o racunu korisnika u banci ili
