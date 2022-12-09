@@ -8,7 +8,7 @@ Implementacija treba da sadrzi 3 komponente:
 2. Servis za obradu zahteva i podataka (Engine)
 3. Bazu podataka (DB)
 
-#Korisnicki interfejs (UI)
+# Korisnicki interfejs (UI)
 
 Korisnicki interfejs je Flask web aplikacija koja treba da opsluzi korisnika u interakciji sa 
 platnim prometom.
@@ -62,13 +62,13 @@ kartice sa on-line racun u Dinarima. Kursna lista se dovlaci sa eksternog API-a 
 Nakon dobijanja liste, korisnik bira valutu i iznos. Nakon uspesne konverzije korisnik ima 
 novo stanje u novoj valuti. Korisnik moze da ima neogranicen broj valuta i stanja racuna u valutama.
 
-#Servis za obradu zahteva i podataka (Engine)
+# Servis za obradu zahteva i podataka (Engine)
 
 Engine je servis implementiran kao flask API aplikacija. Engine ima svoje endpointe koje
 prikazuje eksternom svetu (UI aplikaciji) za koriscenje. UI deo poziva endpointe Engine-a radi
 obrade raznih zahteva i podataka. Pri tome samo Engine komunicira sa bazom, a UI sa Engine-om.
 
-#Baza podataka (DB)
+# Baza podataka (DB)
 
 Baza podataka je u komunikaciji sa Engine-om za svrhu skladistenja podataka o aplikaciji. 
 U bazi se skladiste svi esencijalno bitni podaci za rad aplikacije. Model baze kao i tip
