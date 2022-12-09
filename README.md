@@ -44,10 +44,11 @@ potrebno da unese svoju platnu karticu i bice mu skinuto 1$. Nakon toga korisnik
 uplati sredstva sa kartice na svoj on-line racun.
 
 Test platna kartica:
- -Broj: 4242 4242 4242 4242
- -Ime: <Ime Korisnika>
- -Datum isteka kartice: 02/23
- -Sigurnosni kod: 123
+
+  Broj: 4242 4242 4242 4242 
+  Ime: <Ime Korisnika>
+  Datum isteka kartice: 02/23
+  Sigurnosni kod: 123
 
 Korisnik inicira transakciju drugom korisniku unoseci podatke o racunu korisnika u banci ili
 njegovoj email adresi ukoliko drugi korisnik ima registrovan nalog.
@@ -56,6 +57,7 @@ Kad se inicira transakcija, ona treba da se obradi na strain Engine-a. Transakci
 1. U obradi
 2. Obradjeno
 3. Odbijeno
+
 Potrebno vreme da se transakcija odobri je 2min. Za to vreme sistem mora da bude sposoban da
 odgovori na ostale zahteve. Konverzija valute se vrsi po principu da korisnik uplacuje sa 
 kartice sa on-line racun u Dinarima. Kursna lista se dovlaci sa eksternog API-a kursne liste.
