@@ -12,8 +12,7 @@ services:
       - ./database/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
 
   bankui:
-     build: 
-       dockerfile: ./bankUI/Dockerfile
+     build: ./bankUI/
      depends_on:
        - db
      ports: 
@@ -21,7 +20,7 @@ services:
      links: 
        - db
      volumes:
-       - ./:/usr/src/app/
+       - ./bankUI/:/usr/src/app
 
 volumes:
   db:

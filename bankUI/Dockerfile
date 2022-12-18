@@ -1,15 +1,13 @@
-FROM python:3.9-alpine
+FROM python:3.9.13-alpine
 
-RUN pip install pipenv
+WORKDIR /usr/src/app
 
 COPY . .
 
-WORKDIR /app
-
-RUN pipenv install -no-cache-dir --no-use-pep517 --system --deploy
+RUN pip3 install pipenv --no-cache-dir && \
+    pipenv install --system --deploy --ignore-pipfile && \
+    pip3 uninstall -y pipenv virtualenv-clone virtualenv
 
 EXPOSE 15001
 
-ENTRYPOINT [ "python" ]
-
-CMD [ "main.py" ]
+CMD [ "python", "main.py" ]cls
