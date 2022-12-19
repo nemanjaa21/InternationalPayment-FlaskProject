@@ -6,17 +6,18 @@ CREATE TABLE Kartica(
    BrojKartice BIGINT NOT NULL,
    ImeKorisnika VARCHAR(50) NOT NULL,
    DatumIsteka date,
+   NovcanoStanje BIGINT NOT NULL,
    SigurnosniKod INTEGER NOT NULL,
    CONSTRAINT kartica_PK PRIMARY KEY (BrojKartice)
 
 );
 
-INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,SigurnosniKod) 
-VALUES(4242424242424242,"Pera",'2023-02-01',123);
-INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,SigurnosniKod) 
-VALUES(4552455245524552,"Nikola",'2023-05-01',456);
-INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,SigurnosniKod) 
-VALUES(5555666677778888,"Mark",'2024-07-01',987);
+INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
+VALUES(4242424242424242,"Pera",'2023-02-01',5,123);
+INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
+VALUES(4552455245524552,"Nikola",'2023-05-01',5,456);
+INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
+VALUES(5555666677778888,"Mark",'2024-07-01',5,987);
 
 CREATE TABLE Korisnik(
     Ime VARCHAR(50) NOT NULL,
