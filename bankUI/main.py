@@ -7,11 +7,6 @@ app.config["SESSION_PERMANENT"] = False
 app.secret_key = '5d123d21152d482bb4a1605f5178d1a5'
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
 if __name__ == "__main__":
     app.register_blueprint(user_blueprint, url_prefix='/user')
     app.register_blueprint(account_blueprint, url_prefix='/account')
