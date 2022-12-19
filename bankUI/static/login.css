@@ -1,6 +1,6 @@
 
     body {
-        background-image: url("https://media.rec.ba/2020/11/devizno-poslovanje-unutrasnji-platni-promet.jpg");
+        background-image: url("https://static.vecteezy.com/system/resources/previews/009/097/172/original/e-wallet-digital-wallet-application-internet-banking-online-payment-security-via-credit-card-online-money-transaction-concept-coin-icon-on-dark-background-eps10-illustration-free-vector.jpg");
         background-size: cover;
     }
 
@@ -8,12 +8,12 @@
         font-family: Broadway, cursive;
         text-align: center;
         font-size: 50px;
-        color: #531392
+        color: rgb(159, 233, 243);
     }
 
     table.login {
         margin-right: auto;
-        margin-left: auto;
+        margin-left: 25px;
         font-family: Broadway;
         color: azure;
         border-style: ridge;
@@ -22,7 +22,9 @@
     }
 
     tr.login {
+        font-family: Broadway, cursive;
         font-size: 180%;
+        color: white;
     }
 
     td.submit {
@@ -32,7 +34,7 @@
     input.submit {
         font-size: 90%;
         font-family: Broadway, cursive;
-        color: #521e86;
+        color:  rgb(23, 6, 102);
         background-color: white;
     }
 
@@ -49,19 +51,21 @@
         text-align: center;
         display: block;
         font-size: 28px;
-        color: aqua;
-        opacity: 1.5;
+        color: rgb(159, 233, 243);
+        opacity: 1.0;
     }
 
     a:visited {
-        color: aqua;
+        color: rgb(159, 233, 243);
     }
 
     a:hover {
-        color:  #531392;
+        color:  gray;
     }
 
     a:active {
         color: blue;
     }
+
+
 
