@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fbf4d8129386d2c499fc43a68d140f25ea657524826cbd0c6419abebba866475"
+            "sha256": "72247b538b7113169fb394f53cec02c6a11f5351834d279a0d42b72ea716524e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -41,13 +41,20 @@
             "index": "pypi",
             "version": "==2.2.2"
         },
+        "flask-mysqldb": {
+            "hashes": [
+                "sha256:1c76e9dcc2c2f1f48981e3157c9423358f68a2cdf901a3baf5531c32b13c5826"
+            ],
+            "index": "pypi",
+            "version": "==1.0.1"
+        },
         "importlib-metadata": {
             "hashes": [
-                "sha256:d5059f9f1e8e41f80e9c56c2ee58811450c31984dfa625329ffd7c0dad88a73b",
-                "sha256:d84d17e21670ec07990e1044a99efe8d615d860fd176fc29ef5c306068fda313"
+                "sha256:0eafa39ba42bf225fc00e67f701d71f85aead9f878569caf13c3724f704b970f",
+                "sha256:404d48d62bba0b7a77ff9d405efd91501bef2e67ff4ace0bed40a0cf28c3c7cd"
             ],
             "markers": "python_version < '3.10'",
-            "version": "==5.1.0"
+            "version": "==5.2.0"
         },
         "itsdangerous": {
             "hashes": [
@@ -109,6 +116,19 @@
                 "sha256:fc7b548b17d238737688817ab67deebb30e8073c95749d55538ed473130ec0c7"
             ],
             "markers": "python_version >= '3.7'",
+            "version": "==2.1.1"
+        },
+        "mysqlclient": {
+            "hashes": [
+                "sha256:0d1cd3a5a4d28c222fa199002810e8146cffd821410b67851af4cc80aeccd97c",
+                "sha256:828757e419fb11dd6c5ed2576ec92c3efaa93a0f7c39e263586d1ee779c3d782",
+                "sha256:996924f3483fd36a34a5812210c69e71dea5a3d5978d01199b78b7f6d485c855",
+                "sha256:b355c8b5a7d58f2e909acdbb050858390ee1b0e13672ae759e5e784110022994",
+                "sha256:c1ed71bd6244993b526113cca3df66428609f90e4652f37eb51c33496d478b37",
+                "sha256:c812b67e90082a840efb82a8978369e6e69fc62ce1bda4ca8f3084a9d862308b",
+                "sha256:dea88c8d3f5a5d9293dfe7f087c16dd350ceb175f2f6631c9cf4caf3e19b7a96"
+            ],
+            "markers": "python_version >= '3.5'",
             "version": "==2.1.1"
         },
         "werkzeug": {

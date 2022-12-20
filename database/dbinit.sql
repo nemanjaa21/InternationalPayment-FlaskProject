@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS DRS_PROJEKAT;
+
 CREATE DATABASE DRS_PROJEKAT;
 
 use DRS_PROJEKAT;
@@ -6,7 +8,7 @@ CREATE TABLE Kartica(
    BrojKartice BIGINT NOT NULL,
    ImeKorisnika VARCHAR(50) NOT NULL,
    DatumIsteka date,
-   NovcanoStanje BIGINT NOT NULL,
+   NovcanoStanje FLOAT NOT NULL,
    SigurnosniKod INTEGER NOT NULL,
    CONSTRAINT kartica_PK PRIMARY KEY (BrojKartice)
 
@@ -14,10 +16,6 @@ CREATE TABLE Kartica(
 
 INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
 VALUES(4242424242424242,"Pera",'2023-02-01',5,123);
-INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
-VALUES(4552455245524552,"Nikola",'2023-05-01',5,456);
-INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
-VALUES(5555666677778888,"Mark",'2024-07-01',5,987);
 
 CREATE TABLE Korisnik(
     Ime VARCHAR(50) NOT NULL,
@@ -29,17 +27,16 @@ CREATE TABLE Korisnik(
     Email VARCHAR(50) NOT NULL, 
     Lozinka VARCHAR(50) NOT NULL,
     BrojKartice BIGINT NOT NULL,
-    CONSTRAINT korisnik_PK PRIMARY KEY (Ime),
+    NovcanoStanje FLOAT NOT NULL,
+    Verifikovan TINYINT NOT NULL,
+    Valuta VARCHAR(3) NOT NULL,
+    CONSTRAINT korisnik_PK PRIMARY KEY (Email),
     CONSTRAINT korisnik_FK FOREIGN KEY (BrojKartice) REFERENCES DRS_PROJEKAT.Kartica(BrojKartice)
 
 );
 
-INSERT INTO Korisnik(Ime,Prezime,Adresa,Grad,Drzava,BrojTelefona,Email,Lozinka,BrojKartice)
-VALUES("Pera","Peric","Bulevar Evrope 98","Novi Sad","Srbija",0601112223,"pera@gmail.com","lozinka1",4242424242424242);
-INSERT INTO Korisnik(Ime,Prezime,Adresa,Grad,Drzava,BrojTelefona,Email,Lozinka,BrojKartice)
-VALUES("Nikola","Nikolic","Jovana Ducica 20","Beograd","Srbija",0604442223,"nikola@yahoo.com","lozinka2",4552455245524552);
-INSERT INTO Korisnik(Ime,Prezime,Adresa,Grad,Drzava,BrojTelefona,Email,Lozinka,BrojKartice)
-VALUES("Mark","Peterson","Times Square","New York","SAD",4456767563,"mark@gmail.com","password1",5555666677778888);
+INSERT INTO Korisnik(Ime,Prezime,Adresa,Grad,Drzava,BrojTelefona,Email,Lozinka,BrojKartice,NovcanoStanje,Verifikovan,Valuta)
+VALUES("Pera","Peric","Bulevar Evrope 98","Novi Sad","Srbija",0601112223,"pera@gmail.com","lozinka1",4242424242424242,0,0,"RSD");
 
 
 CREATE TABLE Transakcija(
