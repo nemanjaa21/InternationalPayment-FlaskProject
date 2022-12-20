@@ -1,6 +1,5 @@
 from flask import Flask, render_template
-from blueprints.user import user_blueprint
-from blueprints.account import account_blueprint
+from blueprints import user_blueprint, account_blueprint
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
