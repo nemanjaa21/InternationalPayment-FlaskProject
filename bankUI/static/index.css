@@ -1,7 +1,7 @@
 
     body {
-        background-image: url("https://static.vecteezy.com/system/resources/previews/009/097/172/original/e-wallet-digital-wallet-application-internet-banking-online-payment-security-via-credit-card-online-money-transaction-concept-coin-icon-on-dark-background-eps10-illustration-free-vector.jpg");
-        background-size: cover;
+         background-image: url("../static/Background.jpeg");
+         background-size: cover;
     }
 
     h2.registracija {
