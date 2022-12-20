@@ -53,7 +53,7 @@ def deleteUserByEmail():
 
 @user_blueprint.route('/updateUser', methods=['POST'])
 def updateUser():
-    # insertovanje korisnika u bazu
+
     content = flask.request.json
     ime = content['Ime']
     prezime = content['Prezime']

@@ -16,4 +16,5 @@ mysql = MySQL(app)
 
 if __name__ == "__main__":
     app.register_blueprint(blueprints.user_blueprint, url_prefix='/user')
+    app.register_blueprint(blueprints.card_blueprint, url_prefix='/card')
     app.run(host="0.0.0.0", port=15002, debug=True)
