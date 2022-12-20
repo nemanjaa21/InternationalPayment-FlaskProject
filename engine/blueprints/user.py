@@ -17,3 +17,26 @@ def getUser():
 
     return {'User': _user}, 200
 
+
+@user_blueprint.route('/insertUser', methods=['POST'])
+def insertUser():
+    # insertovanje korisnika u bazu
+    content = flask.request.json
+    ime = content['Ime']
+    prezime = content['Prezime']
+    adresa = content['Adresa']
+    grad = content['Grad']
+    drzava = content['Drzava']
+    brTel = content['BrojTelefona']
+    email = content['Email']
+    lozinka = content['Lozinka']
+    brojKartice = content['BrojKartice']
+    novcanoStanje = content['NovcanoStanje']
+    verifikovan = content['Verifikovan']
+    valuta = content['Valuta']
+    parametri = [ime, prezime, adresa, grad, drzava, brTel, email, lozinka, brojKartice, novcanoStanje, verifikovan,
+                 valuta]
+
+    _user = databaseCRUD.insert(mysql, parametri)
+
+    return {'User': _user}, 200

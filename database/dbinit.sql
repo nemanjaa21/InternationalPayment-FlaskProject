@@ -5,7 +5,7 @@ CREATE DATABASE DRS_PROJEKAT;
 use DRS_PROJEKAT;
 
 CREATE TABLE Kartica(
-   BrojKartice BIGINT NOT NULL,
+   BrojKartice BIGINT,
    ImeKorisnika VARCHAR(50) NOT NULL,
    DatumIsteka date,
    NovcanoStanje FLOAT NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE Korisnik(
     BrojTelefona BIGINT NOT NULL,
     Email VARCHAR(50) NOT NULL, 
     Lozinka VARCHAR(50) NOT NULL,
-    BrojKartice BIGINT NOT NULL,
+    BrojKartice BIGINT,
     NovcanoStanje FLOAT NOT NULL,
     Verifikovan TINYINT NOT NULL,
     Valuta VARCHAR(3) NOT NULL,
@@ -41,7 +41,7 @@ VALUES("Pera","Peric","Bulevar Evrope 98","Novi Sad","Srbija",0601112223,"pera@g
 
 CREATE TABLE Transakcija(
        IdTransakcije INTEGER NOT NULL AUTO_INCREMENT,
-       BrojKarticeKorisnika BIGINT NOT NULL,
+       BrojKarticeKorisnika BIGINT,
        Stanje VARCHAR(50) NOT NULL,
        CONSTRAINT transakcija_PK PRIMARY KEY (IdTransakcije),
        CONSTRAINT transakcija_FK FOREIGN KEY (BrojKarticeKorisnika) REFERENCES DRS_PROJEKAT.Korisnik (BrojKartice)
