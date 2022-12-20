@@ -46,3 +46,47 @@ def insert(mysql: type(MySQL), args) -> dict:
         print(NameError.name)
 
         return {}.get('missing_key', None)
+
+
+def deleteByEmail(mysql: type(MySQL), email) -> dict:
+    _query = "DELETE FROM Korisnik WHERE Korisnik.Email = %(email)s"
+
+    try:
+        with mysql.connection.cursor() as cursor:
+            cursor.execute(_query, {'email': email})
+            mysql.connection.commit()
+    except NameError:
+        print(NameError.name)
+        return {}.get('missing_key', None)
+
+
+def update(mysql: type(MySQL), args) -> dict:
+    if len(args) > 12:
+        return -5
+
+    _ime = args[0]
+    _prezime = args[1]
+    _adresa = args[2]
+    _grad = args[3]
+    _drzava = args[4]
+    _brTelefona = args[5]
+    _email = args[6]
+    _lozinka = args[7]
+    _brKartice = args[8]
+    _novcanoStanje = args[9]
+    _verifikovan = args[10]
+    _valuta = args[11]
+
+    _query = """UPDATE Korisnik SET Ime = %s, Prezime = %s, Adresa = %s, Grad = %s, Drzava = %s,
+     BrojTelefona = %s, Email = %s, Lozinka = %s, BrojKartice = %s, NovcanoStanje = %s,
+      Verifikovan = %s, Valuta = %s WHERE Email = %s """
+    try:
+        with mysql.connection.cursor() as cursor:
+            data = (_ime, _prezime, _adresa, _grad, _drzava, _brTelefona, _email, _lozinka, _brKartice, _novcanoStanje,
+                    _verifikovan, _valuta, _email)
+            cursor.execute(_query, data)
+            mysql.connection.commit()
+    except NameError:
+        print(NameError.name)
+
+        return {}.get('missing_key', None)
