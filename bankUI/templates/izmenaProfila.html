@@ -2,9 +2,89 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Izmena profila</title>
+    <link rel="stylesheet" href="/static/izmenaProfila.css">
 </head>
 <body>
 
+<h2 class="izmenaProfila">Izmeni korisnički profil</h2>
+<div class="izmenaProfila">
+<form action="~/izmenaProfila/Izmeni" method="post">
+    <table class="izmenaProfila">
+        <thead>
+        <tr class="izmenaProfila">
+            <td>
+                Ime:
+            </td>
+            <td>
+                <input class="izmenaProfila" type="text" required name="Ime"/>
+            </td>
+        </tr>
+        <tr class="izmenaProfila">
+            <td>
+                Prezime:
+            </td>
+            <td>
+                <input class="izmenaProfila" type="text" required value="" name="Prezime"/>
+            </td>
+        </tr>
+        <tr class="izmenaProfila">
+            <td>
+                Adresa:
+            </td>
+            <td>
+                <input class="izmenaProfila" type="text" required value="" name="Adresa"/>
+            </td>
+        </tr>
+
+        <tr class="izmenaProfila">
+            <td>
+                Grad:
+            </td>
+            <td>
+                <input class="izmenaProfila" type="text" required value="" name="Grad"/>
+            </td>
+        </tr>
+        <tr class="izmenaProfila">
+            <td>
+                Drzava:
+            </td>
+            <td>
+                <input class="izmenaProfila" type="text" required value="" name="Drzava"/>
+            </td>
+        </tr>
+        <tr class="izmenaProfila">
+            <td>
+                Broj telefona:
+            </td>
+            <td>
+                <input class="izmenaProfila" type="number" required value="" name="BrojTelefona"/>
+            </td>
+        </tr>
+        <tr class="izmenaProfila">
+            <td>
+                Email:
+            </td>
+            <td>
+                <input class="izmenaProfila" type="email" required value="" name="Email"/>
+            </td>
+        </tr>
+        <tr class="izmenaProfila">
+            <td>
+                Lozinka:
+            </td>
+            <td>
+                <input class="registracija" type="password" required value="" name="Lozinka"/>
+            </td>
+        </tr>
+        <tr class="izmenaProfila">
+            <td class="submit" colspan="2">
+                <input class="submit" type="submit" value="Izmeni"/>
+            </td>
+        </tr>
+        </thead>
+    </table>
+</form>
+</div>
 </body>
 </html>
