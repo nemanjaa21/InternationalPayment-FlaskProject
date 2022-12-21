@@ -1,0 +1,57 @@
+
+    body {
+         background-image: url("../static/Background.jpeg");
+         background-size: cover;
+    }
+
+    h2.izmenaProfila {
+        font-family: Broadway, cursive;
+        text-align: center;
+        font-size: 50px;
+        color: rgb(159, 233, 243);
+    }
+
+    table.izmenaProfila {
+        margin-right: auto;
+        margin-left: 25px;
+        font-family: Broadway, cursive;
+        color: white;
+        border-style: ridge;
+        border-color: azure;
+        border-spacing: 12px;
+    }
+
+
+    tr.izmenaProfila {
+        font-family: Broadway, cursive;
+        font-size: 180%;
+        color: white;
+    }
+
+    td.submit {
+        font-family: Broadway, cursive;
+        text-align: center;
+    }
+
+    input.submit {
+        font-size: 90%;
+        font-family: Broadway, cursive;
+        color:  rgb(23, 6, 102);
+        background-color: white;
+    }
+
+    input.izmenaProfila {
+        font-size: 90%;
+    }
+
+    td {
+        margin: 20px;
+    }
+
+
+    select {
+        font-size: 90%;
+    }
+
+
+
