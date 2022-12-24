@@ -43,10 +43,10 @@
       background: rgb(5, 68, 104);
       position: fixed;
       top: 100;
-      left: 0;
+      left: 550px;
       width: 225px;
-      height: 120%;
-      padding: 20px 0;
+      height: 130%;
+      padding: 10px 0;
    }
 
     .profile a {
