@@ -1,0 +1,72 @@
+  body {
+        background-image: url("https://static.vecteezy.com/system/resources/previews/009/097/172/original/e-wallet-digital-wallet-application-internet-banking-online-payment-security-via-credit-card-online-money-transaction-concept-coin-icon-on-dark-background-eps10-illustration-free-vector.jpg");
+        background-size: cover;
+  }
+
+  .manu {
+       overflow: hidden;
+       background-color: #333;
+  }
+
+   .manu a {
+       float: right;
+       color: #f2f2f2;
+       text-align: center;
+       padding: 14px 16px;
+       text-decoration: none;
+       font-size: 20px;
+   }
+
+   .manu a:hover {
+       background-color: #ddd;
+       color: black;
+   }
+
+   .lab {
+       background-color: blue;
+       margin-size:0%;
+   }
+
+   .st{
+      color: white;
+      font-size: 25px;
+      margin-left: 180px;
+
+   }
+   .sd{
+     color: white;
+     font-size: 25px;
+
+   }
+
+   .wrapper {
+      background: rgb(5, 68, 104);
+      position: fixed;
+      top: 100;
+      left: 0;
+      width: 225px;
+      height: 120%;
+      padding: 20px 0;
+   }
+
+    .profile a {
+       float: left;
+       color: #f2f2f2;
+       text-align: center;
+       padding: 14px 16px;
+       text-decoration: none;
+       font-size: 20px;
+    }
+
+    .ad{
+       list-style-type: none;
+
+    }
+    .profile a:hover {
+       background-color: #ddd;
+       color: black;
+
+   }
+
+
+
