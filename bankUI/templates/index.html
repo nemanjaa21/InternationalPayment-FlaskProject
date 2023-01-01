@@ -9,7 +9,7 @@
 
 <h2 class="registracija">Registruj se</h2>
 <div class="registracija">
-<form action="~/Registracija/PokusajRegistracije" method="post">
+<form action="/user/register" method="post">
     <table class="registracija">
         <thead>
         <tr class="registracija">
@@ -17,7 +17,7 @@
                 Ime:
             </td>
             <td>
-                <input class="registracija" type="text" required name="Ime"/>
+                <input class="registracija" type="text" required name="ime" value="{{request.form.ime}}"/>
             </td>
         </tr>
         <tr class="registracija">
@@ -25,7 +25,7 @@
                 Prezime:
             </td>
             <td>
-                <input class="registracija" type="text" required value="" name="Prezime"/>
+                <input class="registracija" type="text" required name="prezime" value="{{request.form.prezime}}"/>
             </td>
         </tr>
         <tr class="registracija">
@@ -33,7 +33,7 @@
                 Adresa:
             </td>
             <td>
-                <input class="registracija" type="text" required value="" name="Adresa"/>
+                <input class="registracija" type="text" required name="adresa" value="{{request.form.adresa}}"/>
             </td>
         </tr>
 
@@ -42,7 +42,7 @@
                 Grad:
             </td>
             <td>
-                <input class="registracija" type="text" required value="" name="Grad"/>
+                <input class="registracija" type="text" required name="grad" value="{{request.form.grad}}"/>
             </td>
         </tr>
         <tr class="registracija">
@@ -50,7 +50,7 @@
                 Drzava:
             </td>
             <td>
-                <input class="registracija" type="text" required value="" name="Drzava"/>
+                <input class="registracija" type="text" required name="drzava" value="{{request.form.drzava}}"/>
             </td>
         </tr>
         <tr class="registracija">
@@ -58,7 +58,7 @@
                 Broj telefona:
             </td>
             <td>
-                <input class="registracija" type="number" required value="" name="BrojTelefona"/>
+                <input class="registracija" type="tel" required name="brojTelefona" value="{{request.form.brojTelefona}}" pattern="[0-9]{6-7}"/>
             </td>
         </tr>
         <tr class="registracija">
@@ -66,7 +66,7 @@
                 Email:
             </td>
             <td>
-                <input class="registracija" type="email" required value="" name="Email"/>
+                <input class="registracija" type="email" required name="email" value="{{request.form.email}}"/>
             </td>
         </tr>
         <tr class="registracija">
@@ -74,7 +74,7 @@
                 Lozinka:
             </td>
             <td>
-                <input class="registracija" type="password" required value="" name="Lozinka"/>
+                <input class="registracija" type="password" required name="lozinka" value="{{request.form.lozinka}}"/>
             </td>
         </tr>
         <tr class="registracija">
@@ -86,6 +86,6 @@
     </table>
 </form>
 </div>
-<a href="/user/login">Stranica za prijavu</a>
+<a href="/user/login">Prijavi se</a>
 </body>
 </html>

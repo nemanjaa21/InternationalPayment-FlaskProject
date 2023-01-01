@@ -3,7 +3,7 @@ from blueprints import user_blueprint, account_blueprint
 
 app = Flask(__name__)
 app.config["SESSION_PERMANENT"] = False
-app.secret_key = '5d123d21152d482bb4a1605f5178d1a5'
+app.config["SECRET_KEY"] = '5d123d21152d482bb4a1605f5178d1a5'
 
 
 @app.route("/")

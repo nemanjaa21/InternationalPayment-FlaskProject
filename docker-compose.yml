@@ -22,10 +22,23 @@ services:
      volumes:
        - ./bankUI/:/usr/src/app
 
+  engine:
+     build: ./engine/
+     depends_on:
+       - db
+     ports:
+       - "15002:15002"
+     links: 
+       - db
+     volumes:
+       - ./engine/:/usr/src/app
+
 volumes:
   db:
     driver: local
   bankui:
+    driver: local
+  engine:
     driver: local
 
 networks:

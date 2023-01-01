@@ -6,12 +6,19 @@
     <link rel="stylesheet" href="/static/nalog.css">
 </head>
 <body>
-<div class="manu">
-    <h class="sd">Dobrodosli <label class="lab"></label></h>
-    <h class="st">Stanje:</h>
-     <input class="stanje" type="number" required value="0" name="Stanje"/>
-    <a href="odjava">Odjava</a>
-    <a href="podesavanja">Podesavanje</a>
+<div class="menu">
+    <span class="title">Dobrodošli, <label class="lab"> {{ session.user.Ime }}!</label></span>
+    {% if session.user %}
+    <span class="balance">Stanje: {{ session.user.NovcanoStanje }} {{ session.user.Valuta }}</span>
+    {% endif %}
+    {% if session.user.Verifikovan == 0 %}
+    <span class="not-verified"> Niste verifikovani </span>
+    {% endif %}
+    {% if session.user.Verifikovan == 1 %}
+    <span class="verified"> Verifikovani ste </span>
+    {% endif %}
+    <a href="{{ url_for('user_blueprint.logout') }}">Odjava</a>
+    <a href="/account/edit">Podešavanje</a>
 </div>
 <div class="wrapper">
 <div class="profile">
@@ -28,7 +35,7 @@
         </tr>
         <tr>
             <td>
-                 <a href="dodaj">Pregleg istorije</a>
+                 <a href="dodaj">Pregled istorije</a>
             </td>
         </tr>
         <tr>
@@ -38,7 +45,7 @@
         </tr>
         <tr>
             <td>
-                <a href="dodaj">Valute</a>
+                <a href="dodaj">Verifikuj</a>
             </td>
         </tr>
     </table>

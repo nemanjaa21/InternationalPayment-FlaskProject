@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_mysqldb import MySQL
-import blueprints
 
 app = Flask(__name__)
 
@@ -12,7 +11,9 @@ app.config['MYSQL_DB'] = 'DRS_PROJEKAT'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 
-mysql = MySQL(app)
+db = MySQL(app)
+
+import blueprints
 
 if __name__ == "__main__":
     app.register_blueprint(blueprints.user_blueprint, url_prefix='/user')

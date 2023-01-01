@@ -10,4 +10,4 @@ RUN pip3 install pipenv --no-cache-dir && \
 
 EXPOSE 15001
 
-CMD [ "python", "main.py" ]cls
+CMD [ "python", "main.py" ]

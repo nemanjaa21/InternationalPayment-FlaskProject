@@ -30,9 +30,7 @@ CREATE TABLE Korisnik(
     NovcanoStanje FLOAT NOT NULL,
     Verifikovan TINYINT NOT NULL,
     Valuta VARCHAR(3) NOT NULL,
-    CONSTRAINT korisnik_PK PRIMARY KEY (Email),
-    CONSTRAINT korisnik_FK FOREIGN KEY (BrojKartice) REFERENCES DRS_PROJEKAT.Kartica(BrojKartice)
-
+    CONSTRAINT korisnik_PK PRIMARY KEY (Email)
 );
 
 INSERT INTO Korisnik(Ime,Prezime,Adresa,Grad,Drzava,BrojTelefona,Email,Lozinka,BrojKartice,NovcanoStanje,Verifikovan,Valuta)

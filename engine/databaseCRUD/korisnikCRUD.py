@@ -1,11 +1,12 @@
-from flask_mysqldb import MySQL
+
+from app import db
 
 
-def getByEmail(mysql: type(MySQL), email: str) -> dict:
+def getByEmail(email: str) -> dict:
     _query = "SELECT * FROM Korisnik WHERE Korisnik.Email = %(email)s"
 
     try:
-        with mysql.connection.cursor() as cursor:
+        with db.connection.cursor() as cursor:
             cursor.execute(_query, {'email': email})
             _user = cursor.fetchone()
 
@@ -16,7 +17,7 @@ def getByEmail(mysql: type(MySQL), email: str) -> dict:
         return {}.get('missing_key', None)
 
 
-def insert(mysql: type(MySQL), args) -> dict:
+def insert(args) -> dict:
     if len(args) > 12:
         return -5
 
@@ -37,30 +38,30 @@ def insert(mysql: type(MySQL), args) -> dict:
     NovcanoStanje, Verifikovan, Valuta) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s); """
 
     try:
-        with mysql.connection.cursor() as cursor:
+        with db.connection.cursor() as cursor:
             data = (_ime, _prezime, _adresa, _grad, _drzava, _brTelefona, _email, _lozinka, _brKartice, _novcanoStanje,
                     _verifikovan, _valuta)
             cursor.execute(_query, data)
-            mysql.connection.commit()
+            db.connection.commit()
     except NameError:
         print(NameError.name)
 
         return {}.get('missing_key', None)
 
 
-def deleteByEmail(mysql: type(MySQL), email) -> dict:
+def deleteByEmail(email) -> dict:
     _query = "DELETE FROM Korisnik WHERE Korisnik.Email = %(email)s"
 
     try:
-        with mysql.connection.cursor() as cursor:
+        with db.connection.cursor() as cursor:
             cursor.execute(_query, {'email': email})
-            mysql.connection.commit()
+            db.connection.commit()
     except NameError:
         print(NameError.name)
         return {}.get('missing_key', None)
 
 
-def update(mysql: type(MySQL), args) -> dict:
+def update(args) -> dict:
     if len(args) > 12:
         return -5
 
@@ -81,11 +82,11 @@ def update(mysql: type(MySQL), args) -> dict:
      BrojTelefona = %s, Email = %s, Lozinka = %s, BrojKartice = %s, NovcanoStanje = %s,
       Verifikovan = %s, Valuta = %s WHERE Email = %s """
     try:
-        with mysql.connection.cursor() as cursor:
+        with db.connection.cursor() as cursor:
             data = (_ime, _prezime, _adresa, _grad, _drzava, _brTelefona, _email, _lozinka, _brKartice, _novcanoStanje,
                     _verifikovan, _valuta, _email)
             cursor.execute(_query, data)
-            mysql.connection.commit()
+            db.connection.commit()
     except NameError:
         print(NameError.name)
 

@@ -2,8 +2,6 @@ from flask import Blueprint
 import databaseCRUD
 import flask
 
-from main import mysql
-
 card_blueprint = Blueprint('card_blueprint', __name__)
 
 
@@ -12,7 +10,7 @@ def getCard():
     content = flask.request.json
     _brojKartice = content['BrojKartice']
 
-    _card = databaseCRUD.getByNumber(mysql, _brojKartice)
+    _card = databaseCRUD.getByNumber(_brojKartice)
 
     return {'Card': _card}, 200
 
@@ -28,7 +26,7 @@ def insertCard():
     sigurnosniKod = content['SigurnosniKod']
     parametri = [brojKartice, imeKorisnika, datumIsteka, novcanoStanje, sigurnosniKod]
 
-    databaseCRUD.insertC(mysql, parametri)
+    databaseCRUD.insertC(parametri)
 
     return "Ok"
 
@@ -37,14 +35,13 @@ def insertCard():
 def deleteCardByNumber():
     content = flask.request.json
     brojKartice = content['BrojKartice']
-    databaseCRUD.deleteByNumber(mysql, brojKartice)
+    databaseCRUD.deleteByNumber(brojKartice)
 
     return "Ok"
 
 
 @card_blueprint.route('/updateCard', methods=['POST'])
 def updateCard():
-
     content = flask.request.json
     brojKartice = content['BrojKartice']
     imeKorisnika = content['ImeKorisnika']
@@ -53,6 +50,6 @@ def updateCard():
     sigurnosniKod = content['SigurnosniKod']
     parametri = [brojKartice, imeKorisnika, datumIsteka, novcanoStanje, sigurnosniKod]
 
-    databaseCRUD.updateC(mysql, parametri)
+    databaseCRUD.updateC(parametri)
 
     return "Ok"

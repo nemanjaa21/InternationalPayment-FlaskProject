@@ -2,42 +2,45 @@
     body {
          background-image: url("../static/Background.jpeg");
          background-size: cover;
+         font-family: OCR A Std, monospace;
     }
 
     h2.registracija {
-        font-family: Broadway, cursive;
-        text-align: center;
-        font-size: 50px;
-        color: rgb(159, 233, 243);
+        text-align: left;
+        margin-left: 25px;
+        margin-bottom: 20px;
+        font-size: 56px;
+        color: white;
     }
 
     table.registracija {
         margin-right: auto;
         margin-left: 25px;
-        font-family: Broadway, cursive;
         color: white;
-        border-style: ridge;
+        border: 1px solid white;
         border-color: azure;
         border-spacing: 12px;
     }
 
-
     tr.registracija {
-        font-family: Broadway, cursive;
         font-size: 180%;
         color: white;
     }
 
     td.submit {
-        font-family: Broadway, cursive;
         text-align: center;
     }
 
     input.submit {
+        margin-left: 400px;
         font-size: 90%;
-        font-family: Broadway, cursive;
-        color:  rgb(23, 6, 102);
+        color: grey;
         background-color: white;
+        border: 2px solid white;
+        padding: 3px 3px;
+        border-radius: 10px;
+        font-size: 20px;
+
     }
 
     input.registracija {
@@ -46,6 +49,7 @@
 
     td {
         margin: 20px;
+        padding: 5px;
     }
 
 
@@ -54,23 +58,17 @@
     }
 
     a {
-        font-family: cursive;
-        text-align: center;
+        text-decoration: none;
+        text-align: left;
+        margin-top: 10px;
+        margin-left: 220px;
         display: block;
         font-size: 28px;
-        color: rgb(159, 233, 243);
+        color: white;
         opacity: 1.0;
     }
 
-    a:visited {
-        color: rgb(159, 233, 243);;
-    }
-
     a:hover {
-        color: gray;
-    }
-
-    a:active {
-        color: blue;
+        color: red;
     }
 
