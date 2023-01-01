@@ -9,7 +9,7 @@
 
 <h2 class="izmenaProfila">Izmeni korisnički profil</h2>
 <div class="izmenaProfila">
-<form action="~/izmenaProfila/Izmeni" method="post">
+<form action="" method="post">
     <table class="izmenaProfila">
         <thead>
         <tr class="izmenaProfila">
@@ -17,7 +17,7 @@
                 Ime:
             </td>
             <td>
-                <input class="izmenaProfila" type="text" required name="Ime"/>
+                <input class="izmenaProfila" type="text" required name="ime" value="{{ session.user.Ime }}">
             </td>
         </tr>
         <tr class="izmenaProfila">
@@ -25,7 +25,7 @@
                 Prezime:
             </td>
             <td>
-                <input class="izmenaProfila" type="text" required value="" name="Prezime"/>
+                <input class="izmenaProfila" type="text" required value="{{ session.user.Prezime }}" name="prezime"/>
             </td>
         </tr>
         <tr class="izmenaProfila">
@@ -33,7 +33,7 @@
                 Adresa:
             </td>
             <td>
-                <input class="izmenaProfila" type="text" required value="" name="Adresa"/>
+                <input class="izmenaProfila" type="text" required value="{{ session.user.Adresa }}" name="adresa"/>
             </td>
         </tr>
 
@@ -42,7 +42,7 @@
                 Grad:
             </td>
             <td>
-                <input class="izmenaProfila" type="text" required value="" name="Grad"/>
+                <input class="izmenaProfila" type="text" required value="{{ session.user.Grad }}" name="grad"/>
             </td>
         </tr>
         <tr class="izmenaProfila">
@@ -50,7 +50,7 @@
                 Drzava:
             </td>
             <td>
-                <input class="izmenaProfila" type="text" required value="" name="Drzava"/>
+                <input class="izmenaProfila" type="text" required value="{{ session.user.Drzava }}" name="drzava"/>
             </td>
         </tr>
         <tr class="izmenaProfila">
@@ -58,7 +58,7 @@
                 Broj telefona:
             </td>
             <td>
-                <input class="izmenaProfila" type="number" required value="" name="BrojTelefona"/>
+                <input class="izmenaProfila" type="text" required value="0{{ session.user.BrojTelefona }}" name="brojTelefona" pattern="[0-9]{6-7}"/>
             </td>
         </tr>
         <tr class="izmenaProfila">
@@ -66,7 +66,7 @@
                 Email:
             </td>
             <td>
-                <input class="izmenaProfila" type="email" required value="" name="Email"/>
+                <input class="izmenaProfila" type="email" required value="{{ session.user.Email }}" name="email"/>
             </td>
         </tr>
         <tr class="izmenaProfila">
@@ -74,7 +74,7 @@
                 Lozinka:
             </td>
             <td>
-                <input class="registracija" type="password" required value="" name="Lozinka"/>
+                <input class="izmenaProfila" type="password"  required value="{{ session.user.Lozinka}}" name="lozinka"/>
             </td>
         </tr>
         <tr class="izmenaProfila">
@@ -86,5 +86,6 @@
     </table>
 </form>
 </div>
+<a class="nalog" href="/account/account">Povratak na nalog</a>
 </body>
 </html>

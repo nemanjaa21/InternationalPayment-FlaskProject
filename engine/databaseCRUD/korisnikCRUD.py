@@ -62,7 +62,7 @@ def deleteByEmail(email) -> dict:
 
 
 def update(args) -> dict:
-    if len(args) > 12:
+    if len(args) > 9:
         return -5
 
     _ime = args[0]
@@ -73,18 +73,13 @@ def update(args) -> dict:
     _brTelefona = args[5]
     _email = args[6]
     _lozinka = args[7]
-    _brKartice = args[8]
-    _novcanoStanje = args[9]
-    _verifikovan = args[10]
-    _valuta = args[11]
+    _oldEmail = args[8]
 
     _query = """UPDATE Korisnik SET Ime = %s, Prezime = %s, Adresa = %s, Grad = %s, Drzava = %s,
-     BrojTelefona = %s, Email = %s, Lozinka = %s, BrojKartice = %s, NovcanoStanje = %s,
-      Verifikovan = %s, Valuta = %s WHERE Email = %s """
+     BrojTelefona = %s, Email = %s, Lozinka = %s WHERE Email = %s """
     try:
         with db.connection.cursor() as cursor:
-            data = (_ime, _prezime, _adresa, _grad, _drzava, _brTelefona, _email, _lozinka, _brKartice, _novcanoStanje,
-                    _verifikovan, _valuta, _email)
+            data = (_ime, _prezime, _adresa, _grad, _drzava, _brTelefona, _email, _lozinka, _oldEmail)
             cursor.execute(_query, data)
             db.connection.commit()
     except NameError:

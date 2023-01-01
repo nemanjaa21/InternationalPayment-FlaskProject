@@ -61,21 +61,18 @@ def deleteUserByEmail():
 @user_blueprint.route('/updateUser', methods=['POST'])
 def updateUser():
     content = flask.request.json
-    ime = content['Ime']
-    prezime = content['Prezime']
-    adresa = content['Adresa']
-    grad = content['Grad']
-    drzava = content['Drzava']
-    brTel = content['BrojTelefona']
-    email = content['Email']
-    lozinka = content['Lozinka']
-    brojKartice = content['BrojKartice']
-    novcanoStanje = content['NovcanoStanje']
-    verifikovan = content['Verifikovan']
-    valuta = content['Valuta']
-    parametri = [ime, prezime, adresa, grad, drzava, brTel, email, lozinka, brojKartice, novcanoStanje, verifikovan,
-                 valuta]
+    ime = content['ime']
+    prezime = content['prezime']
+    adresa = content['adresa']
+    grad = content['grad']
+    drzava = content['drzava']
+    brTel = content['brTelefona']
+    email = content['email']
+    lozinka = content['lozinka']
+    oldEmail = content['oldEmail']
+
+    parametri = [ime, prezime, adresa, grad, drzava, brTel, email, lozinka, oldEmail]
 
     databaseCRUD.update(parametri)
 
-    return "Ok"
+    return {'message': 'Korisnik uspesno izmenjen!'}, 200
