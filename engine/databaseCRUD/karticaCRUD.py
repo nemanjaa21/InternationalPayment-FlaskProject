@@ -18,7 +18,7 @@ def getByNumber(BrojKartice: str) -> dict:
 
 def insertC(args) -> dict:
     if len(args) > 5:
-        return -6
+        return {}.get('missing_key', None)
 
     _brojKartice = args[0]
     _imeKorisnika = args[1]
@@ -56,7 +56,7 @@ def deleteByNumber(BrojKartice) -> dict:
 
 def updateC(args) -> dict:
     if len(args) > 5:
-        return -6
+        return {}.get('missing_key', None)
 
     _brojKartice = args[0]
     _imeKorisnika = args[1]
@@ -70,6 +70,26 @@ def updateC(args) -> dict:
     try:
         with db.connection.cursor() as cursor:
             data = (_brojKartice, _imeKorisnika, _datumIsteka, _novcanoStanje, _sigurnosniKod,_brojKartice)
+            cursor.execute(_query, data)
+            db.connection.commit()
+    except NameError:
+        print(NameError.name)
+
+        return {}.get('missing_key', None)
+
+
+def decreaseBalance(args) -> dict:
+    if len(args) > 2:
+        return {}.get('missing_key', None)
+
+    _brojKartice = args[0]
+    _novcanoStanje = args[1]
+
+    _query = "UPDATE Kartica SET NovcanoStanje = %s WHERE BrojKartice = %s "
+
+    try:
+        with db.connection.cursor() as cursor:
+            data = (_novcanoStanje, _brojKartice)
             cursor.execute(_query, data)
             db.connection.commit()
     except NameError:

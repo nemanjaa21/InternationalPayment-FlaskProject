@@ -4,10 +4,10 @@
     <list default="true" id="ef625a38-c8d9-495c-9f7a-e7e89ef3c519" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blueprints/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/account.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/izmenaProfila.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/izmenaProfila.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/nalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/nalog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/izmenaProfila.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/izmenaProfila.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/nalog.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/nalog.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../engine/blueprints/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/../engine/blueprints/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../engine/databaseCRUD/karticaCRUD.py" beforeDir="false" afterPath="$PROJECT_DIR$/../engine/databaseCRUD/karticaCRUD.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../engine/databaseCRUD/korisnikCRUD.py" beforeDir="false" afterPath="$PROJECT_DIR$/../engine/databaseCRUD/korisnikCRUD.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

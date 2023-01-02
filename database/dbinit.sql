@@ -11,11 +11,12 @@ CREATE TABLE Kartica(
    NovcanoStanje FLOAT NOT NULL,
    SigurnosniKod INTEGER NOT NULL,
    CONSTRAINT kartica_PK PRIMARY KEY (BrojKartice)
-
 );
 
 INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
-VALUES(4242424242424242,"Pera",'2023-02-01',5,123);
+VALUES(4242424242424242,"Pera",'2026-02-01',2000,123);
+INSERT INTO Kartica(BrojKartice,ImeKorisnika,DatumIsteka,NovcanoStanje,SigurnosniKod) 
+VALUES(4343434343434343,"Nemanja",'2030-10-05',30000,456);
 
 CREATE TABLE Korisnik(
     Ime VARCHAR(50) NOT NULL,
@@ -34,7 +35,7 @@ CREATE TABLE Korisnik(
 );
 
 INSERT INTO Korisnik(Ime,Prezime,Adresa,Grad,Drzava,BrojTelefona,Email,Lozinka,BrojKartice,NovcanoStanje,Verifikovan,Valuta)
-VALUES("Pera","Peric","Bulevar Evrope 98","Novi Sad","Srbija",0601112223,"pera@gmail.com","lozinka1",4242424242424242,0,0,"RSD");
+VALUES("Pera","Peric","Bulevar Evrope 98","Novi Sad","Srbija",0601112223,"pera@gmail.com","lozinka1",0,0,0,"RSD");
 
 
 CREATE TABLE Transakcija(

@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, json, redirect, url_for, session
+from flask import Flask, Blueprint, render_template, request, json, redirect, url_for, session, flash
 
 import requests
 
@@ -50,3 +50,28 @@ def edit():
                 return render_template("index.html")
 
         return redirect(url_for('account_blueprint.account'))
+
+
+@account_blueprint.route('/verify', methods=['POST'])
+def verify():
+    if 'user' not in session:
+        return redirect(url_for('user_blueprint.login'))
+
+    _brKartice = request.form['brKartice']
+    _ime = request.form['ime']
+    _datum = request.form['datum']
+    _kod = request.form['kod']
+    _email = session['user']['Email']
+
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    body = json.dumps({'brKartice': _brKartice, 'ime': _ime, 'datum': _datum, 'sigurnosniKod': _kod, 'email': _email})
+    req = requests.post("http://127.0.0.1:15002/user/updateUserCardNumber", data=body, headers=headers)
+    response = (req.json())
+    _code = req.status_code
+    _message = response['message']
+
+    if _code == 400:
+        return render_template("nalog.html", message=_message)
+    elif _code == 200:
+        session['user']['Verifikovan'] = 1
+        return render_template("nalog.html")

@@ -1,4 +1,3 @@
-
 from app import db
 
 
@@ -80,6 +79,25 @@ def update(args) -> dict:
     try:
         with db.connection.cursor() as cursor:
             data = (_ime, _prezime, _adresa, _grad, _drzava, _brTelefona, _email, _lozinka, _oldEmail)
+            cursor.execute(_query, data)
+            db.connection.commit()
+    except NameError:
+        print(NameError.name)
+
+        return {}.get('missing_key', None)
+
+
+def updateCardNumber(args) -> dict:
+    if len(args) > 2:
+        return -5
+
+    _brKartice = args[0]
+    _email = args[1]
+
+    _query = """UPDATE Korisnik SET BrojKartice = %s, Verifikovan = %s WHERE Email = %s """
+    try:
+        with db.connection.cursor() as cursor:
+            data = (_brKartice, 1, _email)
             cursor.execute(_query, data)
             db.connection.commit()
     except NameError:

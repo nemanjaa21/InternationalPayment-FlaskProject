@@ -59,7 +59,7 @@ def deleteUserByEmail():
 
 
 @user_blueprint.route('/updateUser', methods=['POST'])
-def updateUser():
+def updateUserCardNumber():
     content = flask.request.json
     ime = content['ime']
     prezime = content['prezime']
@@ -76,3 +76,37 @@ def updateUser():
     databaseCRUD.update(parametri)
 
     return {'message': 'Korisnik uspesno izmenjen!'}, 200
+
+
+@user_blueprint.route('/updateUserCardNumber', methods=['POST'])
+def updateUser():
+    content = flask.request.json
+    brKartice = content['brKartice']
+    ime = content['ime']
+    datumIsteka = content['datum']
+    sigurnosniKod = content['sigurnosniKod']
+    email = content['email']
+
+    _card = databaseCRUD.getByNumber(brKartice)
+
+    if _card is None:
+        return {'message': 'Kartica ne postoji.'}, 400
+    else:
+        if _card['ImeKorisnika'] != ime:
+            return {'message': 'Pogrešno ime.'}, 400
+        elif _card['DatumIsteka'].strftime("%Y-%m-%d") != datumIsteka:
+            return {'message': 'Pogrešan datum.'}, 400
+        elif str(_card['SigurnosniKod']) != sigurnosniKod:
+            return {'message': 'Pogrešan kod.'}, 400
+        elif (_card['NovcanoStanje'] - 1) < 0:
+            return {'message': 'Nedovoljno sredstva.'}, 400
+
+        parametri = [brKartice, email]
+
+        databaseCRUD.updateCardNumber(parametri)
+
+        newBalance = _card['NovcanoStanje'] - 1
+        parametri = [brKartice, newBalance]
+        databaseCRUD.decreaseBalance(parametri)
+
+        return {'message': 'Korisnik uspesno verifikovan!'}, 200
