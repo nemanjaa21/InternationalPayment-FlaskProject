@@ -75,3 +75,23 @@ def verify():
     elif _code == 200:
         session['user']['Verifikovan'] = 1
         return render_template("nalog.html")
+
+
+@account_blueprint.route('addMoney', methods=['POST'])
+def addMoney():
+    if 'user' not in session:
+      return render_template("nalog.html");
+
+    _kolicina = request.form['unosNovca']
+
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    body = json.dumps({'NovcanoStanje': _kolicina})
+    req = requests.post("http://127.0.0.1:15002/user/transferMoney", data=body, headers=headers)
+    response = (req.json())
+    _code = req.status_code
+    _message = response['message']
+
+    if _code == 400:
+        return render_template("nalog.html", message=_message)
+    elif _code == 200:
+        return render_template("nalog.html")

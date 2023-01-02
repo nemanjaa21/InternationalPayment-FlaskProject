@@ -107,9 +107,30 @@
                 </form>`);
         {% endif %}
 
-            $("#add").click( function(){
+            $("#add").click(function(){
                 $(".float-child2").html("");
                 $(".float-child2").show();
+
+                $(".float-child2").append(` <form action="{{ url_for('account_blueprint.addMoney') }}" method="post">
+    <table class="brKartice" style="margin-top: 15px;">
+        <tbody>
+           <tr>
+               <td>
+                  <label class="label">Kolicina novca:</label>
+               </td>
+               <td>
+                <input type="text" class="card-number" placeholder="Unesite kolicinu novca" name="unosNovca">
+               </td>
+           </tr>
+
+           <tr>
+            <td colspan="2">
+                <input class="submit" type="submit" name="submit" value="Unesi">
+            </td>
+           </tr>
+        </tbody>
+   </table>
+ </form>`);
             });
 
             $("#change").click( function(){
@@ -179,7 +200,7 @@
     </table>
     </span>
 
-    <span class="float-child2"  hidden>
+    <span class="float-child2" hidden>
     </span>
 
 </div>

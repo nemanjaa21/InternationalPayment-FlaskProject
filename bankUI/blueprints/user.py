@@ -7,7 +7,7 @@ user_blueprint = Blueprint('user_blueprint', __name__)
 
 @user_blueprint.route('/')
 def index():
-    # TO DO: index logic
+
     return render_template('index.html')
 
 
