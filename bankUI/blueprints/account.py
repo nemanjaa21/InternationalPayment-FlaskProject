@@ -98,3 +98,10 @@ def addMoney():
     elif _code == 200:
         session['user']['NovcanoStanje'] = _stanje
         return render_template("nalog.html")
+
+
+@account_blueprint.route('changeCurrency', methods=['POST'])
+def changeCurrency():
+
+    if 'user' not in session:
+        return render_template("user_blueprint.login");

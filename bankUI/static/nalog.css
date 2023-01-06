@@ -111,6 +111,24 @@
         border-radius: 10px;
    }
 
+   .transfer-money {
+        text-align: center;
+        margin-left: 10px;
+        width: 200px;
+        font-size: 16px;
+        border: 1px solid white;
+        border-radius: 10px;
+   }
+
+    .select-currency {
+        text-align: center;
+        margin-left: 70px;
+        width: 200px;
+        font-size: 16px;
+        border: 1px solid white;
+        border-radius: 10px;
+   }
+
    .label {
         color: white;
    }

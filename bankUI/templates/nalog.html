@@ -9,8 +9,6 @@
     <script type="text/javascript">
         $(document).ready( function(){
 
-
-
               {% if session.user.Verifikovan == 0 %}
 
                $("#add").hide();
@@ -141,7 +139,7 @@
                   <label class="label">Kolicina novca:</label>
                </td>
                <td>
-                <input type="text" class="card-number" value="0" placeholder="Unesite kolicinu novca" name="unosNovca">
+                <input type="text" class="transfer-money" value="0" placeholder="Unesite kolicinu novca" name="unosNovca">
                </td>
            </tr>
 
@@ -159,6 +157,32 @@
             $("#change").click( function(){
                 $(".float-child2").html("");
                 $(".float-child2").show();
+
+                $(".float-child2").append(` <form action="{{ url_for('account_blueprint.changeCurrency') }}" method="post">
+    <table class="brKartice" style="margin-top: 15px;">
+        <tbody>
+           <tr>
+               <td>
+                  <label class="label">Valuta:</label>
+               </td>
+               <td>
+                <select class="select-currency" name="valutaa">
+                    <option value="1">RSD</option>
+                    <option value="2">EUR</option>
+                </select>
+                </td>
+           </tr>
+
+           <tr>
+            <td colspan="2">
+                <input class="submit" id="unesiDugme" type="submit" name="submit" value="Promeni valutu">
+            </td>
+           </tr>
+        </tbody>
+   </table>
+ </form>`);
+
+
             });
 
             $("#history").click( function(){
