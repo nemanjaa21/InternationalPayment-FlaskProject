@@ -9,6 +9,18 @@
     <script type="text/javascript">
         $(document).ready( function(){
 
+
+
+              {% if session.user.Verifikovan == 0 %}
+
+               $("#add").hide();
+               $("#change").hide();
+               $("#history").hide();
+               $("#transaction").hide();
+
+              {% endif %}
+
+
             $("#ver").click( function(){
                 $(".float-child2").html("");
                 $(".float-child2").show();
@@ -49,12 +61,22 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input class="submit" type="submit" value="Verifikuj"/>
+                        <input class="submit" id="dugmeVerifikuj" type="submit" value="Verifikuj"/>
                     </td>
                 </tr>
             </table>
         </form>`);
             });
+
+            $("#dugmeVerifikuj").click( function(){
+               $("#add").show();
+               $("#change").show();
+               $("#history").show();
+               $("#transaction").show();
+               $("#ver").hide();
+
+            });
+
 
         {% if message %}
 
@@ -119,18 +141,19 @@
                   <label class="label">Kolicina novca:</label>
                </td>
                <td>
-                <input type="text" class="card-number" placeholder="Unesite kolicinu novca" name="unosNovca">
+                <input type="text" class="card-number" value="0" placeholder="Unesite kolicinu novca" name="unosNovca">
                </td>
            </tr>
 
            <tr>
             <td colspan="2">
-                <input class="submit" type="submit" name="submit" value="Unesi">
+                <input class="submit" id="unesiDugme" type="submit" name="submit" value="Unesi">
             </td>
            </tr>
         </tbody>
    </table>
  </form>`);
+
             });
 
             $("#change").click( function(){
@@ -155,7 +178,7 @@
 <div class="menu">
     <span class="title">Dobrodošli, <label class="lab"> {{ session.user.Ime }}!</label></span>
     {% if session.user %}
-    <span class="balance">Stanje: {{ session.user.NovcanoStanje }} {{ session.user.Valuta }}</span>
+    <span id="stanje" class="balance">Stanje: {{ session.user.NovcanoStanje }} {{ session.user.Valuta }}</span>
     {% endif %}
     {% if session.user.Verifikovan == 0 %}
     <span class="not-verified"> Niste verifikovani </span>
@@ -172,22 +195,22 @@
     <table>
         <tr>
             <td>
-                <a href="#" id="add">Ubacivanje sredstava</a>
+                <a href="#" id="add" >Ubacivanje sredstava</a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="#" id="change">Promeni valutu</a>
+                <a href="#" id="change" >Promeni valutu</a>
             </td>
         </tr>
         <tr>
             <td>
-                 <a href="#" id="history">Pregled istorije</a>
+                 <a href="#" id="history" >Pregled istorije</a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="dodaj" id="transaction">Nove transakcije</a>
+                <a href="dodaj" id="transaction" >Nove transakcije</a>
             </td>
         </tr>
          {% if session.user.Verifikovan == 0 %}

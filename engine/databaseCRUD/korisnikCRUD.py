@@ -87,6 +87,25 @@ def update(args) -> dict:
         return {}.get('missing_key', None)
 
 
+def updateUserBalance(args) -> dict:
+    if len(args) > 2:
+        return -5
+
+    _email = args[0]
+    _novac = args[1]
+
+    _query = """UPDATE Korisnik SET NovcanoStanje = %s WHERE Email = %s """
+    try:
+        with db.connection.cursor() as cursor:
+            data = (_novac, _email)
+            cursor.execute(_query, data)
+            db.connection.commit()
+    except NameError:
+        print(NameError.name)
+
+        return {}.get('missing_key', None)
+
+
 def updateCardNumber(args) -> dict:
     if len(args) > 2:
         return -5

@@ -80,18 +80,21 @@ def verify():
 @account_blueprint.route('addMoney', methods=['POST'])
 def addMoney():
     if 'user' not in session:
-      return render_template("nalog.html");
+        return render_template("user_blueprint.login");
 
+    _email = session['user']['Email']
     _kolicina = request.form['unosNovca']
 
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-    body = json.dumps({'NovcanoStanje': _kolicina})
+    body = json.dumps({'Email': _email, 'NovcanoStanje': _kolicina})
     req = requests.post("http://127.0.0.1:15002/user/transferMoney", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
     _message = response['message']
+    _stanje = response['stanje']
 
     if _code == 400:
         return render_template("nalog.html", message=_message)
     elif _code == 200:
+        session['user']['NovcanoStanje'] = _stanje
         return render_template("nalog.html")

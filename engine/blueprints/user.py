@@ -110,3 +110,27 @@ def updateUser():
         databaseCRUD.decreaseBalance(parametri)
 
         return {'message': 'Korisnik uspesno verifikovan!'}, 200
+
+
+@user_blueprint.route('/transferMoney', methods=['POST'])
+def transferMoney():
+    content = flask.request.json
+    email = content['Email']
+    kolicina = content['NovcanoStanje']
+
+    _user = databaseCRUD.getByEmail(email)
+    _card = databaseCRUD.getByNumber(_user['BrojKartice'])
+
+    if float(kolicina) > _card['NovcanoStanje']:
+        return {'message': 'Nemate dovoljno novca na kartici.'}, 400
+
+    _user['NovcanoStanje'] = _user['NovcanoStanje'] + float(kolicina)
+    _card['NovcanoStanje'] = _card['NovcanoStanje'] - float(kolicina)
+
+    parametri1 = [_card['BrojKartice'], _card['ImeKorisnika'], _card['DatumIsteka'],
+                  _card['NovcanoStanje'], _card['SigurnosniKod']]
+    parametri2 = [_user['Email'], _user['NovcanoStanje']]
+    databaseCRUD.updateC(parametri1)
+    databaseCRUD.updateUserBalance(parametri2)
+
+    return {'message': 'Novac sa kartice na online racun uspesno prebacen!', 'stanje': _user['NovcanoStanje']}, 200
