@@ -134,3 +134,20 @@ def transferMoney():
     databaseCRUD.updateUserBalance(parametri2)
 
     return {'message': 'Novac sa kartice na online racun uspesno prebacen!', 'stanje': _user['NovcanoStanje']}, 200
+
+
+@user_blueprint.route('/changeCurrency', methods=['POST'])
+def changeCurrency():
+    content = flask.request.json
+    _convertedValue = content['ConvertedValue']
+    _valutaUKojuPrebacujem = content['ValutaUKojuPrebacujem']
+    _email = content['Email']
+
+    _user = databaseCRUD.getByEmail(_email)
+    _user['NovcanoStanje'] = _convertedValue
+    _user['Valuta'] = _valutaUKojuPrebacujem
+    parametri = [_user['Email'], _user['NovcanoStanje'],_user['Valuta']]
+
+    databaseCRUD.updateUserBalanceAndCurrency(parametri)
+
+    return {'message': 'Korisnik uspesno promenio valutu!'}, 200

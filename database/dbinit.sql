@@ -41,8 +41,7 @@ VALUES("Pera","Peric","Bulevar Evrope 98","Novi Sad","Srbija",0601112223,"pera@g
 CREATE TABLE Transakcija(
        IdTransakcije INTEGER NOT NULL AUTO_INCREMENT,
        BrojKarticeKorisnika BIGINT,
-       Stanje VARCHAR(50) NOT NULL,
-       CONSTRAINT transakcija_PK PRIMARY KEY (IdTransakcije),
-       CONSTRAINT transakcija_FK FOREIGN KEY (BrojKarticeKorisnika) REFERENCES DRS_PROJEKAT.Korisnik (BrojKartice)
+       KolicinaNovca FLOAT NOT NULL,
+       CONSTRAINT transakcija_PK PRIMARY KEY (IdTransakcije)
        
 );

@@ -81,7 +81,6 @@ def verify():
 def addMoney():
     if 'user' not in session:
         return render_template("user_blueprint.login");
-
     _email = session['user']['Email']
     _kolicina = request.form['unosNovca']
 
@@ -91,17 +90,42 @@ def addMoney():
     response = (req.json())
     _code = req.status_code
     _message = response['message']
-    _stanje = response['stanje']
 
     if _code == 400:
+        session['message'] = _message
         return render_template("nalog.html", message=_message)
     elif _code == 200:
+        _stanje = response['stanje']
         session['user']['NovcanoStanje'] = _stanje
         return render_template("nalog.html")
 
 
-@account_blueprint.route('changeCurrency', methods=['POST'])
+@account_blueprint.route('changeCurrency', methods=['POST', 'GET'])
 def changeCurrency():
-
     if 'user' not in session:
         return render_template("user_blueprint.login");
+
+    _valutaTrenutna = session['user']['Valuta'];
+    _novcanoStanjeTrenutno = session['user']['NovcanoStanje']
+    _email = session['user']['Email']
+
+    URL = f"https://v6.exchangerate-api.com/v6/84da0ca6eca0cde00ef3f0ac/latest/{_valutaTrenutna}"
+    r = requests.get(url=URL)
+    data = r.json();
+
+    _valutaUKojuPrebacujem = request.form['valuta2'];
+    _rate = data['conversion_rates'][f'{_valutaUKojuPrebacujem}'];
+    _convertedValue = _novcanoStanjeTrenutno * _rate;
+    _convertedValue = round(_convertedValue, 2);
+
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    body = json.dumps(
+        {'ConvertedValue': _convertedValue, 'ValutaUKojuPrebacujem': _valutaUKojuPrebacujem, 'Email': _email})
+    req = requests.post("http://127.0.0.1:15002/user/changeCurrency", data=body, headers=headers)
+    response = (req.json())
+    _code = req.status_code
+    _message = response['message']
+    session['user']['Valuta'] = _valutaUKojuPrebacujem
+    session['user']['NovcanoStanje'] = _convertedValue
+
+    return render_template("nalog.html");
