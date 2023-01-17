@@ -523,7 +523,20 @@
                 valuta1.value = "{{session.user.Valuta}}";
 
 });
+            {% if messageNoMoney %}
 
+                $(".float-child2").show();
+                 $('.float-child2').append(`
+                                         <table class="brKartice" style="margin-top: 15px;">
+                   {% if messageNoMoney %}
+                    <tr class="message">
+                       <td colspan="2">{{ messageNoMoney }}</td>
+                    </tr>
+                   {% endif %}
+
+               </table>
+                `);
+            {% endif %}
 
 
 

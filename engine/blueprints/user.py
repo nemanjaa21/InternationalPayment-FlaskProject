@@ -22,6 +22,17 @@ def getUser():
     return {'message': 'Korisnik ne postoji!'}, 400
 
 
+@user_blueprint.route('/refreshUser', methods=['GET', 'POST'])
+def refreshUser():
+
+    content = flask.request.json
+    _email = content['email']
+
+    _user = databaseCRUD.getByEmail(_email)
+
+    return {'user': _user}, 200
+
+
 @user_blueprint.route('/insertUser', methods=['POST'])
 def insertUser():
     # insertovanje korisnika u bazu
@@ -116,16 +127,17 @@ def updateUser():
 def transferMoney():
     content = flask.request.json
     email = content['Email']
-    kolicina = content['NovcanoStanje']
+    kolicinaUDinarima = content['KolicinaUDinarima']
+    kolicinaOnline = content['KolicinaOnline']
 
     _user = databaseCRUD.getByEmail(email)
     _card = databaseCRUD.getByNumber(_user['BrojKartice'])
 
-    if float(kolicina) > _card['NovcanoStanje']:
+    if float(kolicinaUDinarima) > _card['NovcanoStanje']:
         return {'message': 'Nemate dovoljno novca na kartici.'}, 400
 
-    _user['NovcanoStanje'] = _user['NovcanoStanje'] + float(kolicina)
-    _card['NovcanoStanje'] = _card['NovcanoStanje'] - float(kolicina)
+    _user['NovcanoStanje'] = _user['NovcanoStanje'] + float(kolicinaOnline)
+    _card['NovcanoStanje'] = _card['NovcanoStanje'] - float(kolicinaUDinarima)
 
     parametri1 = [_card['BrojKartice'], _card['ImeKorisnika'], _card['DatumIsteka'],
                   _card['NovcanoStanje'], _card['SigurnosniKod']]
@@ -139,15 +151,17 @@ def transferMoney():
 @user_blueprint.route('/changeCurrency', methods=['POST'])
 def changeCurrency():
     content = flask.request.json
-    _convertedValue = content['ConvertedValue']
+    _rate = content['Rate']
     _valutaUKojuPrebacujem = content['ValutaUKojuPrebacujem']
     _email = content['Email']
 
     _user = databaseCRUD.getByEmail(_email)
+    _convertedValue = _user['NovcanoStanje'] * _rate
+    _convertedValue = round(_convertedValue, 2)
     _user['NovcanoStanje'] = _convertedValue
     _user['Valuta'] = _valutaUKojuPrebacujem
-    parametri = [_user['Email'], _user['NovcanoStanje'],_user['Valuta']]
+    parametri = [_user['Email'], _user['NovcanoStanje'], _user['Valuta']]
 
     databaseCRUD.updateUserBalanceAndCurrency(parametri)
 
-    return {'message': 'Korisnik uspesno promenio valutu!'}, 200
+    return {'ConvertedValue': _convertedValue}, 200

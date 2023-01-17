@@ -42,6 +42,7 @@ CREATE TABLE Transakcija(
        IdTransakcije INTEGER NOT NULL AUTO_INCREMENT,
        BrojKarticeKorisnika BIGINT,
        KolicinaNovca FLOAT NOT NULL,
+       StatusTransakcije VARCHAR(20) NOT NULL,
        CONSTRAINT transakcija_PK PRIMARY KEY (IdTransakcije)
        
 );

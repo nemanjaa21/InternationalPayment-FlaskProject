@@ -9,6 +9,17 @@ account_blueprint = Blueprint('account_blueprint', __name__)
 def account():
     if 'user' not in session:
         return redirect(url_for('user_blueprint.login'))
+
+    _email = session['user']['Email']
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    body = json.dumps({'email': _email})
+    req = requests.post("http://127.0.0.1:15002/user/refreshUser", data=body, headers=headers)
+    response = (req.json())
+    _code = req.status_code
+    _user = response['user']
+    session.permanent = False
+    session['user'] = _user
+
     return render_template('nalog.html')
 
 
@@ -80,52 +91,63 @@ def verify():
 @account_blueprint.route('addMoney', methods=['POST'])
 def addMoney():
     if 'user' not in session:
-        return render_template("user_blueprint.login");
+        return render_template("user_blueprint.login")
+
+    if request.method == 'GET':
+        return render_template('nalog.html')
+
     _email = session['user']['Email']
-    _kolicina = request.form['unosNovca']
+    _kolicinaOnline = request.form['unosNovca']
+
+    URL = f"https://v6.exchangerate-api.com/v6/84da0ca6eca0cde00ef3f0ac/latest/{session['user']['Valuta']}"
+    r = requests.get(url=URL)
+    data = r.json()
+
+    _rate = data['conversion_rates']['RSD']
+    _kolicina = float(_kolicinaOnline) * float(_rate)
 
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
-    body = json.dumps({'Email': _email, 'NovcanoStanje': _kolicina})
+    body = json.dumps({'Email': _email, 'KolicinaUDinarima': _kolicina, 'KolicinaOnline': _kolicinaOnline})
     req = requests.post("http://127.0.0.1:15002/user/transferMoney", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
     _message = response['message']
 
     if _code == 400:
-        session['message'] = _message
-        return render_template("nalog.html", message=_message)
+        return render_template("nalog.html", messageNoMoney=_message)
     elif _code == 200:
         _stanje = response['stanje']
-        session['user']['NovcanoStanje'] = _stanje
-        return render_template("nalog.html")
+        session['user']['NovcanoStanje'] = round(_stanje, 2)
+        return redirect(url_for('account_blueprint.account'))
 
 
-@account_blueprint.route('changeCurrency', methods=['POST', 'GET'])
+@account_blueprint.route('changeCurrency', methods=['POST'])
 def changeCurrency():
     if 'user' not in session:
-        return render_template("user_blueprint.login");
+        return render_template("user_blueprint.login")
 
-    _valutaTrenutna = session['user']['Valuta'];
+    if request.method == 'GET':
+        return render_template('nalog.html')
+
+    _valutaTrenutna = session['user']['Valuta']
     _novcanoStanjeTrenutno = session['user']['NovcanoStanje']
     _email = session['user']['Email']
 
     URL = f"https://v6.exchangerate-api.com/v6/84da0ca6eca0cde00ef3f0ac/latest/{_valutaTrenutna}"
     r = requests.get(url=URL)
-    data = r.json();
+    data = r.json()
 
-    _valutaUKojuPrebacujem = request.form['valuta2'];
-    _rate = data['conversion_rates'][f'{_valutaUKojuPrebacujem}'];
-    _convertedValue = _novcanoStanjeTrenutno * _rate;
-    _convertedValue = round(_convertedValue, 2);
+    _valutaUKojuPrebacujem = request.form['valuta2']
+    _rate = data['conversion_rates'][f'{_valutaUKojuPrebacujem}']
 
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     body = json.dumps(
-        {'ConvertedValue': _convertedValue, 'ValutaUKojuPrebacujem': _valutaUKojuPrebacujem, 'Email': _email})
+        {'Rate': _rate, 'ValutaUKojuPrebacujem': _valutaUKojuPrebacujem, 'Email': _email})
     req = requests.post("http://127.0.0.1:15002/user/changeCurrency", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
-    _message = response['message']
+    _convertedValue = response['ConvertedValue']
     session['user']['Valuta'] = _valutaUKojuPrebacujem
     session['user']['NovcanoStanje'] = _convertedValue
 
-    return render_template("nalog.html");
+    return redirect(url_for('account_blueprint.account'))
