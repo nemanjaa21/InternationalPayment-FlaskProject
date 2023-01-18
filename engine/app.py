@@ -18,4 +18,5 @@ import blueprints
 if __name__ == "__main__":
     app.register_blueprint(blueprints.user_blueprint, url_prefix='/user')
     app.register_blueprint(blueprints.card_blueprint, url_prefix='/card')
+    app.register_blueprint(blueprints.transaction_blueprint, url_prefix='/transaction')
     app.run(host="0.0.0.0", port=15002, debug=True)
