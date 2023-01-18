@@ -554,7 +554,7 @@
 <div class="menu">
     <span class="title">Dobrodošli, <label class="lab"> {{ session.user.Ime }}!</label></span>
     {% if session.user %}
-    <span id="stanje" class="balance">Stanje: {{ session.user.NovcanoStanje }} {{ session.user.Valuta }}</span>
+    <span id="stanje" class="balance">Stanje: {{ session.user.NovcanoStanje|round(2) }} {{ session.user.Valuta }}</span>
     {% endif %}
     {% if session.user.Verifikovan == 0 %}
     <span class="not-verified"> Niste verifikovani </span>

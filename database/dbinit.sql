@@ -40,9 +40,12 @@ VALUES("Pera","Peric","Bulevar Evrope 98","Novi Sad","Srbija",0601112223,"pera@g
 
 CREATE TABLE Transakcija(
        IdTransakcije INTEGER NOT NULL AUTO_INCREMENT,
+       Posiljalac VARCHAR(50) NOT NULL,
+       Primalac VARCHAR(50),
        BrojKarticeKorisnika BIGINT,
        KolicinaNovca FLOAT NOT NULL,
        StatusTransakcije VARCHAR(20) NOT NULL,
+       Valuta VARCHAR(3) NOT NULL,
        CONSTRAINT transakcija_PK PRIMARY KEY (IdTransakcije)
        
 );

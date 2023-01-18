@@ -4,7 +4,6 @@
     <list default="true" id="ef625a38-c8d9-495c-9f7a-e7e89ef3c519" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blueprints/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/account.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/nalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/nalog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/nalog.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/nalog.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +34,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/DRS-Projekat/bankUI&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/night/Desktop/DRS-Projekat/bankUI&quot;
   }
 }</component>
   <component name="RunManager">

@@ -117,7 +117,7 @@ def addMoney():
         return render_template("nalog.html", messageNoMoney=_message)
     elif _code == 200:
         _stanje = response['stanje']
-        session['user']['NovcanoStanje'] = round(_stanje, 2)
+        session['user']['NovcanoStanje'] = _stanje
         return redirect(url_for('account_blueprint.account'))
 
 
