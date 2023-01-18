@@ -6,9 +6,6 @@
       <change beforePath="$PROJECT_DIR$/blueprints/account.py" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/account.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/nalog.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/nalog.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/nalog.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/nalog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../engine/blueprints/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/../engine/blueprints/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../engine/databaseCRUD/karticaCRUD.py" beforeDir="false" afterPath="$PROJECT_DIR$/../engine/databaseCRUD/karticaCRUD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../engine/databaseCRUD/korisnikCRUD.py" beforeDir="false" afterPath="$PROJECT_DIR$/../engine/databaseCRUD/korisnikCRUD.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +35,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/night/Desktop/DRS-Projekat/bankUI&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/DRS-Projekat/bankUI&quot;
   }
 }</component>
   <component name="RunManager">

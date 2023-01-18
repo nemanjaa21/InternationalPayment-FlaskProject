@@ -151,3 +151,17 @@ def changeCurrency():
     session['user']['NovcanoStanje'] = _convertedValue
 
     return redirect(url_for('account_blueprint.account'))
+
+
+@account_blueprint.route('showTransactionHistory', methods=['GET'])
+def showTransactionHistory():
+    _email = session['user']['Email']
+
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    body = json.dumps({'Email': _email})
+    req = requests.get("http://127.0.0.1:15002/transaction/getAllTransactionsForUser", data=body, headers=headers)
+    response = (req.json())
+    _code = req.status_code
+    _transactions = response['Transakcije']
+
+    return render_template("history.html", podaci=_transactions)

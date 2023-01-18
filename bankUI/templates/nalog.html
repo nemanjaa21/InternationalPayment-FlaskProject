@@ -540,10 +540,7 @@
 
 
 
-            $("#history").click( function(){
-                $(".float-child2").html("");
-                $(".float-child2").show();
-            });
+
 
              $("#transaction").click( function(){
                 $(".float-child2").html("");
@@ -590,7 +587,7 @@
         </tr>
         <tr>
             <td>
-                 <a href="#" id="history" >Pregled istorije</a>
+                 <a href="/account/showTransactionHistory" id="history" >Pregled istorije</a>
             </td>
         </tr>
          {% if session.user.Verifikovan == 0 %}
