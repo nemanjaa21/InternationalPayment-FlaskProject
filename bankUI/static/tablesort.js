@@ -45,7 +45,8 @@
 
     }
 
-    .table-sortable th {
+
+.table-sortable th {
 	cursor: pointer;
 }
 

@@ -545,6 +545,60 @@
              $("#transaction").click( function(){
                 $(".float-child2").html("");
                 $(".float-child2").show();
+                $('.float-child2').append(` <form action="{{ url_for('account_blueprint.transactionOnline') }}" method="post">
+                                         <table class="brKartice" style="margin-top: 15px;">
+                <tr>
+                    <td>
+                        <label class="label">Email primaoca: </label>
+                    </td>
+                    <td>
+                        <input type="text" class="card-number" required placeholder="Unesite email primaoca" name="emailPrimaoca">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label">Kolicina novca: </label>
+                    </td>
+                    <td>
+                        <input type="text" required class="card-number" placeholder="0.00 {{session.user.Valuta}}" name="kolicinaZaOnline">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input class="submit" id="dugmeUplatiOnline" type="submit" value="Uplati na online racun"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <form action="{{ url_for('account_blueprint.transactionCard') }}" method="post">
+                                         <table class="brKartice" style="margin-top: 15px;">
+                <tr>
+                    <td>
+                        <label class="label">Broj kartice primaoca: </label>
+                    </td>
+                    <td>
+                        <input type="text" required class="card-number" placeholder="0000 0000 0000 0000" name="brKarticePrimaoca">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label class="label">Kolicina novca: </label>
+                    </td>
+                    <td>
+                        <input type="text" required class="card-number" placeholder="0.00 {{session.user.Valuta}}" name="kolicinaZaCard">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input class="submit" id="dugmeUplatiCard" type="submit" value="Uplati na karticu"/>
+                    </td>
+                </tr>
+            </table>
+        </form>`
+
+
+        );
             });
        });
     </script>

@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Istorija transakcije</title>
     <link rel="stylesheet" href="/static/history.css">
 </head>
@@ -9,11 +11,17 @@
 
 <h2 class="history">Istorija transakcija za korisnika {{ session.user.Ime }}</h2>
 <div id="divHistory" class="history">
-    <table class="history">
+    <table class="history table-sortable">
         <thead>
         <tr class="trTransaction">
             <th class="thTransaction">
                 Id transakcije
+            </th>
+            <th class="thTransaction">
+                Posiljalac
+            </th>
+            <th class="thTransaction">
+                Primalac
             </th>
             <th class="thTransaction">
                 Broj kartice korisnika
@@ -22,7 +30,10 @@
                 Kolicina novca
             </th>
             <th class="thTransaction">
-                Status
+                Status transakcije
+            </th>
+            <th class="thTransaction">
+                Valuta
             </th>
         </tr>
         </thead>
@@ -30,13 +41,17 @@
         {% for podatak in podaci %}
                       <tr class="thTransaction">
                         <td class="tdTransaction">{{ podatak.IdTransakcije }}</td>
+                          <td class="tdTransaction">{{ podatak.Posiljalac }}</td>
+                          <td class="tdTransaction">{{ podatak.Primalac }}</td>
                         <td class="tdTransaction">{{ podatak.BrojKarticeKorisnika }}</td>
                         <td class="tdTransaction">{{ podatak.KolicinaNovca }}</td>
                         <td class="tdTransaction">{{ podatak.StatusTransakcije }}</td>
+                          <td class="tdTransaction">{{ podatak.Valuta }}</td>
                       </tr>
                 {% endfor %}
         </tbody>
     </table>
+    <script src="/static/tablesort.js"></script>
 </div>
 <a class="nalog" href="/account/account">Povratak na nalog</a>
 </body>

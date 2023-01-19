@@ -165,3 +165,30 @@ def showTransactionHistory():
     _transactions = response['Transakcije']
 
     return render_template("history.html", podaci=_transactions)
+
+
+@account_blueprint.route('transactionOnline', methods=['GET', 'POST'])
+def transactionOnline():
+    _emailPosiljaoca = session['user']['Email']
+    _valuta = session['user']['Valuta']
+    _emailPrimaoca = request.form['emailPrimaoca']
+    _kolicinaOnline = request.form['kolicinaZaOnline']
+
+    URL = f"https://v6.exchangerate-api.com/v6/84da0ca6eca0cde00ef3f0ac/latest/{_valuta}"
+    r = requests.get(url=URL)
+    data = r.json()
+    _odnosiZaKonverziju = data['conversion_rates']
+
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    body = json.dumps(
+        {'Posiljalac': emailPosiljaoca, 'Primalac': emailPrimaoca, 'Kolicina': float(_kolicinaOnline),
+         'Valuta': valuta, 'OdnosiZaKonverziju': odnosiZaKonverziju})
+    req = requests.post("http://127.0.0.1:15002/transaction/initTransaction1", data=body, headers=headers)
+    _code = req.status_code
+
+    return redirect(url_for('account_blueprint.account'))
+
+
+@account_blueprint.route('transactionCard', methods=['GET', 'POST'])
+def transactionCard():
+    return redirect(url_for('account_blueprint.account'))

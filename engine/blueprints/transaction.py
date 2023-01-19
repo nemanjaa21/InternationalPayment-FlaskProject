@@ -17,8 +17,7 @@ transaction_blueprint = Blueprint('transaction_blueprint', __name__)
 def getAllTransactionsForUser():
     content = flask.request.json
     _email = content['Email']
-    _user = databaseCRUD.getByEmail(_email)
-    _transactions = databaseCRUD.getAllTransactionsForUser(_user['BrojKartice'])
+    _transactions = databaseCRUD.getAllTransactionsForUser(_email)
 
     return {'Transakcije': _transactions}, 200
 
@@ -60,7 +59,6 @@ def transactionProcess(queue: Queue):
     while 1:
         print("[PROCESS] Waiting for a new transaction")
         transaction = queue.get()
-        print(transaction.transactionId,transaction.receiver,transaction.sender)
         print(f"Transaction ID=[{transaction.transactionId}] started.")
 
         if isinstance(transaction, Transaction1):
@@ -71,12 +69,10 @@ def transactionProcess(queue: Queue):
             _senderUser = cursor.fetchone()
             cursor.close()
 
-            print("Usao 1")
             cursor = mydb.cursor()
             cursor.execute("SELECT * FROM Korisnik WHERE Korisnik.Email = %s", (transaction.receiver,))
             _receiverUser = cursor.fetchone()
             cursor.close()
-            print(_receiverUser)
 
             _oduzeti = 0
             if _senderUser is not None and _receiverUser is not None:

@@ -1,12 +1,12 @@
 from app import db
 
 
-def getAllTransactionsForUser(BrojKarticeKorisnika: str) -> dict:
-    _query = "SELECT * FROM Transakcija WHERE BrojKarticeKorisnika = %(BrojKarticeKorisnika)s"
+def getAllTransactionsForUser(Posiljalac: str) -> dict:
+    _query = "SELECT * FROM Transakcija WHERE Posiljalac = %(Posiljalac)s"
 
     try:
         with db.connection.cursor() as cursor:
-            cursor.execute(_query, {'BrojKarticeKorisnika': BrojKarticeKorisnika})
+            cursor.execute(_query, {'Posiljalac': Posiljalac})
             _transaction = cursor.fetchall()
 
             return _transaction
