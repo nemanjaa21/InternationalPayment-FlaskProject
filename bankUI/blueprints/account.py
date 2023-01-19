@@ -181,8 +181,8 @@ def transactionOnline():
 
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     body = json.dumps(
-        {'Posiljalac': emailPosiljaoca, 'Primalac': emailPrimaoca, 'Kolicina': float(_kolicinaOnline),
-         'Valuta': valuta, 'OdnosiZaKonverziju': odnosiZaKonverziju})
+        {'Posiljalac': _emailPosiljaoca, 'Primalac': _emailPrimaoca, 'Kolicina': float(_kolicinaOnline),
+         'Valuta': _valuta, 'OdnosiZaKonverziju': _odnosiZaKonverziju})
     req = requests.post("http://127.0.0.1:15002/transaction/initTransaction1", data=body, headers=headers)
     _code = req.status_code
 
