@@ -39,7 +39,7 @@ def insertTransaction(args) -> dict:
 
 
 def updateTransaction1(args) -> dict:
-    if len(args) > 2:
+    if len(args) > 3:
         return {}.get('missing_key', None)
 
     _id = args[0]
@@ -74,7 +74,7 @@ def getLastTransactionId() -> int:
 
 
 def insertTransaction1(args):
-    if len(args) > 5:
+    if len(args) > 6:
         return -5
 
     _posiljalac = args[0]
