@@ -56,3 +56,33 @@
 .table-sortable .th-sort-desc::after {
 	content: "\25be";
 }
+
+.filter{
+        float: right;
+        margin-top: 4%;
+        margin-left: 15px;
+        text-align: center;
+        color: blue;
+        font-size: 25px;
+}
+
+.menu {
+       margin-top: 5px;
+       width: 100%;
+  }
+
+   .menu a {
+       float: right;
+       color: #f2f2f2;
+       text-align: center;
+       padding: 14px 16px;
+       text-decoration: none;
+       font-size: 30px;
+       margin-right: 25px;
+       margin-top:-85px;
+   }
+
+   .menu a:hover {
+       background-color: #ddd;
+       color: black;
+   }
