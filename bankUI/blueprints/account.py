@@ -191,4 +191,21 @@ def transactionOnline():
 
 @account_blueprint.route('transactionCard', methods=['GET', 'POST'])
 def transactionCard():
+    _emailPosiljaoca = session['user']['Email']
+    _valuta = session['user']['Valuta']
+    _brKartice = request.form['brKarticePrimaoca']
+    _kolicinaCard = request.form['kolicinaZaCard']
+
+    URL = f"https://v6.exchangerate-api.com/v6/84da0ca6eca0cde00ef3f0ac/latest/{_valuta}"
+    r = requests.get(url=URL)
+    data = r.json()
+    _odnosiZaKonverziju = data['conversion_rates']
+
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    body = json.dumps(
+        {'Posiljalac': _emailPosiljaoca, 'PrimalacBrojKartice': _brKartice, 'Kolicina': float(_kolicinaCard),
+         'Valuta': _valuta, 'OdnosiZaKonverziju': _odnosiZaKonverziju})
+    req = requests.post("http://127.0.0.1:15002/transaction/initTransaction2", data=body, headers=headers)
+    _code = req.status_code
+
     return redirect(url_for('account_blueprint.account'))

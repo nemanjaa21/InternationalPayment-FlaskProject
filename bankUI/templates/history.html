@@ -56,13 +56,24 @@
                       <tr class="thTransaction">
                         <td class="tdTransaction">{{ podatak.IdTransakcije }}</td>
                           <td class="tdTransaction">{{ podatak.Posiljalac }}</td>
-                          <td class="tdTransaction">{{ podatak.Primalac }}</td>
-                        <td class="tdTransaction">{{ podatak.BrojKarticeKorisnika }}</td>
+
+                          {% if podatak.Primalac == None %}
+                          <td class="tdTransaction">/</td>
+                           {% else %}
+                           <td class="tdTransaction">{{ podatak.Primalac }}</td>
+                          {% endif %}
+
+                          {% if podatak.BrojKarticeKorisnika == None %}
+                          <td class="tdTransaction">/</td>
+                          {% else %}
+                           <td class="tdTransaction">{{ podatak.BrojKarticeKorisnika }}</td>
+                          {% endif %}
+
                         <td class="tdTransaction">{{ podatak.KolicinaNovca }}</td>
                         <td class="tdTransaction">{{ podatak.StatusTransakcije }}</td>
                           <td class="tdTransaction">{{ podatak.Valuta }}</td>
                       </tr>
-                {% endfor %}
+        {% endfor %}
         </tbody>
     </table>
     <div>
