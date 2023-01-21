@@ -157,7 +157,6 @@ def changeCurrency():
 
     _user = databaseCRUD.getByEmail(_email)
     _convertedValue = _user['NovcanoStanje'] * _rate
-    _convertedValue = round(_convertedValue, 2)
     _user['NovcanoStanje'] = _convertedValue
     _user['Valuta'] = _valutaUKojuPrebacujem
     parametri = [_user['Email'], _user['NovcanoStanje'], _user['Valuta']]

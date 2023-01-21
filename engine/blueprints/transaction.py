@@ -7,6 +7,7 @@ import MySQLdb
 from multiprocessing import Queue
 from time import sleep
 from models.Transaction1 import Transaction1
+from models.Transaction2 import Transaction2
 
 queue = Queue()
 
@@ -43,6 +44,26 @@ def initTransaction1():
     return "Ok"
 
 
+@transaction_blueprint.route('/initTransaction2', methods=['POST'])
+def initTransaction2():
+    content = flask.request.json
+    _senderEmail = content['Posiljalac']
+    _receiverCardNumber = content['PrimalacBrojKartice']
+    _amount = content['Kolicina']
+    _currency = content['Valuta']
+    _rates = content['OdnosiZaKonverziju']
+    _id = databaseCRUD.getLastTransactionId()
+
+    parametri = [_senderEmail, _receiverCardNumber, _amount, "U OBRADI", _currency]
+    databaseCRUD.insertTransaction2(parametri)
+
+    _transakcija = Transaction2(_id, _senderEmail, _receiverCardNumber, _amount, _rates, _currency)
+
+    thread = threading.Thread(target=transactionThread, args=(_transakcija,))
+    thread.start()
+
+    return "Ok"
+
 ###############
 #### METODE ###
 ###############
@@ -58,14 +79,19 @@ def transactionThread(transakcija):
 def transactionProcess(queue: Queue):
     while 1:
         print("[PROCESS] Waiting for a new transaction")
-        transaction = queue.get()
+
+        try:
+            transaction = queue.get()
+        except KeyboardInterrupt:
+            break
+
         print(f"Transaction ID=[{transaction.transactionId}] started.")
 
         if isinstance(transaction, Transaction1):
             # Online - Online
-            mydb = MySQLdb.connect(host="localhost",user="root",passwd="pass",db="DRS_PROJEKAT",port=9000)
+            mydb = MySQLdb.connect(host="localhost", user="root", passwd="pass", db="DRS_PROJEKAT", port=9000)
             cursor = mydb.cursor()
-            cursor.execute("SELECT * FROM Korisnik WHERE Korisnik.Email = %s",(transaction.sender,))
+            cursor.execute("SELECT * FROM Korisnik WHERE Korisnik.Email = %s", (transaction.sender,))
             _senderUser = cursor.fetchone()
             cursor.close()
 
@@ -75,6 +101,7 @@ def transactionProcess(queue: Queue):
             cursor.close()
 
             _oduzeti = 0
+
             if _senderUser is not None and _receiverUser is not None:
 
                 if str(_senderUser[11]) == str(transaction.currency):
@@ -89,7 +116,8 @@ def transactionProcess(queue: Queue):
                 if _novoStanjePosiljaoca >= 0:
                     # Promeni stanje korisniku koji je uplatio novac
                     cursor = mydb.cursor()
-                    cursor.execute("UPDATE Korisnik SET NovcanoStanje = %s WHERE Email = %s ", (_novoStanjePosiljaoca,transaction.sender,))
+                    cursor.execute("UPDATE Korisnik SET NovcanoStanje = %s WHERE Email = %s ",
+                                   (_novoStanjePosiljaoca, transaction.sender,))
                     cursor.close()
 
                     # Konvertovanje u valutu primaoca
@@ -114,7 +142,76 @@ def transactionProcess(queue: Queue):
                     cursor.close()
 
                 else:
+                    cursor = mydb.cursor()
+                    cursor.execute("UPDATE Transakcija SET StatusTransakcije = %s WHERE IdTransakcije = %s;",
+                                   ("ODBIJENO", transaction.transactionId,))
+                    mydb.commit()
+                    cursor.close()
 
+            else:
+                cursor = mydb.cursor()
+                cursor.execute("UPDATE Transakcija SET StatusTransakcije = %s WHERE IdTransakcije = %s;",
+                               ("ODBIJENO", transaction.transactionId,))
+                mydb.commit()
+                cursor.close()
+
+        elif isinstance(transaction, Transaction2):
+            # Online - BankAccount
+            mydb = MySQLdb.connect(host="localhost", user="root", passwd="pass", db="DRS_PROJEKAT", port=9000)
+
+            cursor = mydb.cursor()
+            cursor.execute("SELECT * FROM Korisnik WHERE Korisnik.Email = %s", (transaction.sender,))
+            _senderUser = cursor.fetchone()
+            cursor.close()
+
+            cursor = mydb.cursor()
+            cursor.execute("SELECT * FROM Kartica WHERE Kartica.BrojKartice = %s", (transaction.receiverCardNumber,))
+            _receiverCard = cursor.fetchone()
+            cursor.close()
+
+            _oduzeti = 0
+
+            if _senderUser is not None and _receiverCard is not None:
+                if str(_senderUser[11]) == str(transaction.currency):
+                    # Nije se menjala valuta posiljaoca
+                    _oduzeti = transaction.senderAmount
+                else:
+                    # Promenila se valuta posiljaoca, neophodna konverzija
+                    _oduzeti = float(transaction.senderAmount) * transaction.conversionRates[_senderUser[11]]
+
+                _novoStanjePosiljaoca = _senderUser[9] - _oduzeti
+
+                if _novoStanjePosiljaoca >= 0:
+                    # Promeni stanje korisniku koji je uplatio novac
+                    cursor = mydb.cursor()
+                    cursor.execute("UPDATE Korisnik SET NovcanoStanje = %s WHERE Email = %s ",
+                                   (_novoStanjePosiljaoca, transaction.sender,))
+                    cursor.close()
+
+                    # Konvertovanje u valutu primaoca (Kartica je uvek dinarska)
+                    if str(transaction.currency) == "RSD":
+                        _dodati = float(transaction.senderAmount)
+                    else:
+                        _dodati = float(transaction.senderAmount) * transaction.conversionRates['RSD']
+
+                    # Promeni stanje kartice na koju se uplacuje novac
+
+                    _novoStanjePrimaoca = _receiverCard[3] + _dodati
+                    cursor = mydb.cursor()
+                    cursor.execute("UPDATE Kartica SET NovcanoStanje = %s WHERE BrojKartice = %s ",
+                                   (_novoStanjePrimaoca, transaction.receiverCardNumber,))
+
+                    cursor.close()
+
+                    # Transakcija uspesna
+
+                    cursor = mydb.cursor()
+                    cursor.execute("UPDATE Transakcija SET StatusTransakcije = %s WHERE IdTransakcije = %s;",
+                                   ("OBRADJENO", transaction.transactionId,))
+                    mydb.commit()
+                    cursor.close()
+
+                else:
                     cursor = mydb.cursor()
                     cursor.execute("UPDATE Transakcija SET StatusTransakcije = %s WHERE IdTransakcije = %s;",
                                    ("ODBIJENO", transaction.transactionId,))

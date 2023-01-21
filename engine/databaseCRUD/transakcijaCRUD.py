@@ -93,3 +93,25 @@ def insertTransaction1(args):
             db.connection.commit()
     except NameError:
         print(NameError.name)
+
+
+def insertTransaction2(args):
+    if len(args) > 6:
+        return -5
+
+    _posiljalac = args[0]
+    _primalacBrojKartice = args[1]
+    _kolicinaNovca = args[2]
+    _status = args[3]
+    _valuta = args[4]
+
+    _query = """INSERT INTO Transakcija (Posiljalac, BrojKarticeKorisnika, KolicinaNovca, StatusTransakcije, Valuta) 
+    VALUES (%s, %s, %s, %s, %s); """
+
+    try:
+        with db.connection.cursor() as cursor:
+            data = (_posiljalac, _primalacBrojKartice, _kolicinaNovca, _status, _valuta)
+            cursor.execute(_query, data)
+            db.connection.commit()
+    except NameError:
+        print(NameError.name)
