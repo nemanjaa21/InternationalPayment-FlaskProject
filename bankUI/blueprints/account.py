@@ -85,7 +85,7 @@ def verify():
         return render_template("nalog.html", message=_message)
     elif _code == 200:
         session['user']['Verifikovan'] = 1
-        return render_template("nalog.html")
+        return redirect(url_for('account_blueprint.account'))
 
 
 @account_blueprint.route('addMoney', methods=['POST'])
