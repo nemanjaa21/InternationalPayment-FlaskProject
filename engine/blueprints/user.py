@@ -109,14 +109,14 @@ def updateUser():
             return {'message': 'Pogrešan datum.'}, 400
         elif str(_card['SigurnosniKod']) != sigurnosniKod:
             return {'message': 'Pogrešan kod.'}, 400
-        elif (_card['NovcanoStanje'] - 1) < 0:
+        elif (_card['NovcanoStanje'] - 100) < 0:
             return {'message': 'Nedovoljno sredstva.'}, 400
 
         parametri = [brKartice, email]
 
         databaseCRUD.updateCardNumber(parametri)
 
-        newBalance = _card['NovcanoStanje'] - 1
+        newBalance = _card['NovcanoStanje'] - 100
         parametri = [brKartice, newBalance]
         databaseCRUD.decreaseBalance(parametri)
 
