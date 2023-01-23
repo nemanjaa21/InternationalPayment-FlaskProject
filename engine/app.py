@@ -5,8 +5,8 @@ from blueprints.transaction import queue, transactionProcess
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_PORT'] = 9000
+app.config['MYSQL_HOST'] = 'db'
+app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'pass'
 app.config['MYSQL_DB'] = 'DRS_PROJEKAT'

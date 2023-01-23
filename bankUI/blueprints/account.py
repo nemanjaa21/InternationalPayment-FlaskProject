@@ -1,4 +1,5 @@
 from flask import Flask, Blueprint, render_template, request, json, redirect, url_for, session, flash
+from time import sleep
 
 import requests
 
@@ -13,7 +14,7 @@ def account():
     _email = session['user']['Email']
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     body = json.dumps({'email': _email})
-    req = requests.post("http://127.0.0.1:15002/user/refreshUser", data=body, headers=headers)
+    req = requests.post("http://engine:15002/user/refreshUser", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
     _user = response['user']
@@ -42,13 +43,13 @@ def edit():
         body = json.dumps({'ime': _ime, 'prezime': _prezime, 'adresa': _adresa, 'grad': _grad,
                            'drzava': _drzava, "brTelefona": _brTelefona, 'email': _email,
                            'oldEmail': session['user']['Email'], 'lozinka': _lozinka})
-        req = requests.post("http://127.0.0.1:15002/user/updateUser", data=body, headers=headers)
+        req = requests.post("http://engine:15002/user/updateUser", data=body, headers=headers)
         response = (req.json())
         _code = req.status_code
 
         if _code == 200:
             body = json.dumps({'email': _email, 'password': _lozinka})
-            req = requests.post("http://127.0.0.1:15002/user/getUserByEmail", data=body, headers=headers)
+            req = requests.post("http://engine:15002/user/getUserByEmail", data=body, headers=headers)
             response = (req.json())
             _code = req.status_code
 
@@ -76,7 +77,7 @@ def verify():
 
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     body = json.dumps({'brKartice': _brKartice, 'ime': _ime, 'datum': _datum, 'sigurnosniKod': _kod, 'email': _email})
-    req = requests.post("http://127.0.0.1:15002/user/updateUserCardNumber", data=body, headers=headers)
+    req = requests.post("http://engine:15002/user/updateUserCardNumber", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
     _message = response['message']
@@ -108,7 +109,7 @@ def addMoney():
 
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     body = json.dumps({'Email': _email, 'KolicinaUDinarima': _kolicina, 'KolicinaOnline': _kolicinaOnline})
-    req = requests.post("http://127.0.0.1:15002/user/transferMoney", data=body, headers=headers)
+    req = requests.post("http://engine:15002/user/transferMoney", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
     _message = response['message']
@@ -143,7 +144,7 @@ def changeCurrency():
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     body = json.dumps(
         {'Rate': _rate, 'ValutaUKojuPrebacujem': _valutaUKojuPrebacujem, 'Email': _email})
-    req = requests.post("http://127.0.0.1:15002/user/changeCurrency", data=body, headers=headers)
+    req = requests.post("http://engine:15002/user/changeCurrency", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
     _convertedValue = response['ConvertedValue']
@@ -159,7 +160,7 @@ def showTransactionHistory():
 
     headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     body = json.dumps({'Email': _email})
-    req = requests.get("http://127.0.0.1:15002/transaction/getAllTransactionsForUser", data=body, headers=headers)
+    req = requests.get("http://engine:15002/transaction/getAllTransactionsForUser", data=body, headers=headers)
     response = (req.json())
     _code = req.status_code
     _transactions = response['Transakcije']
@@ -183,7 +184,7 @@ def transactionOnline():
     body = json.dumps(
         {'Posiljalac': _emailPosiljaoca, 'Primalac': _emailPrimaoca, 'Kolicina': float(_kolicinaOnline),
          'Valuta': _valuta, 'OdnosiZaKonverziju': _odnosiZaKonverziju})
-    req = requests.post("http://127.0.0.1:15002/transaction/initTransaction1", data=body, headers=headers)
+    req = requests.post("http://engine:15002/transaction/initTransaction1", data=body, headers=headers)
     _code = req.status_code
 
     return redirect(url_for('account_blueprint.account'))
@@ -205,7 +206,7 @@ def transactionCard():
     body = json.dumps(
         {'Posiljalac': _emailPosiljaoca, 'PrimalacBrojKartice': _brKartice, 'Kolicina': float(_kolicinaCard),
          'Valuta': _valuta, 'OdnosiZaKonverziju': _odnosiZaKonverziju})
-    req = requests.post("http://127.0.0.1:15002/transaction/initTransaction2", data=body, headers=headers)
+    req = requests.post("http://engine:15002/transaction/initTransaction2", data=body, headers=headers)
     _code = req.status_code
 
     return redirect(url_for('account_blueprint.account'))

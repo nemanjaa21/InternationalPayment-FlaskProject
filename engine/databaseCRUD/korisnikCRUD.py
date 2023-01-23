@@ -8,6 +8,7 @@ def getByEmail(email: str) -> dict:
         with db.connection.cursor() as cursor:
             cursor.execute(_query, {'email': email})
             _user = cursor.fetchone()
+            cursor.close()
 
             return _user
     except NameError:

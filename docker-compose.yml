@@ -4,34 +4,40 @@ services:
     image: nemanjaa21/drs-projekat:mysqldrs
     restart: always
     ports:
-      - "9000:3306"
+      - 9000:3306
+    expose:
+      - 9000
     environment:
       MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: test_db
+      MYSQL_DATABASE: DRS_PROJEKAT
+    command: 
+      - --wait_timeout=28800 
+      - --innodb-log-file-size=1G
+      - --max_allowed_packet=256M
     volumes:
       - ./database/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
-
-  bankui:
-     build: ./bankUI/
-     depends_on:
-       - db
-     ports: 
-       - "15001:15001"
-     links: 
-       - db
-     volumes:
-       - ./bankUI/:/usr/src/app
-
+      
   engine:
      build: ./engine/
      depends_on:
        - db
      ports:
-       - "15002:15002"
+       - 15002:15002
      links: 
        - db
      volumes:
-       - ./engine/:/usr/src/app
+      - ./engine/:/usr/src/app
+
+  bankui:
+     build: ./bankUI/
+     depends_on:
+       - engine
+     ports: 
+       - 15001:15001
+     links: 
+       - engine
+     volumes:
+       - ./bankUI/:/usr/src/app
 
 volumes:
   db:

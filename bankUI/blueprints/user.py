@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, render_template, request, json, session, redirect, url_for, make_response
-
+from time import sleep
 import requests
 
 user_blueprint = Blueprint('user_blueprint', __name__)
@@ -28,13 +28,14 @@ def register():
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         body = json.dumps({'ime': _ime, 'prezime': _prezime, 'adresa': _adresa, 'grad': _grad,
                            'drzava': _drzava, "brTelefona": _brTelefona, 'email': _email, 'lozinka': _lozinka})
-        req = requests.post("http://127.0.0.1:15002/user/insertUser", data=body, headers=headers)
+        req = requests.post("http://engine:15002/user/insertUser", data=body, headers=headers)
         response = (req.json())
+        print(response)
         _code = req.status_code
 
         if _code == 200:
             body = json.dumps({'email': _email, 'password': _lozinka})
-            req = requests.post("http://127.0.0.1:15002/user/getUserByEmail", data=body, headers=headers)
+            req = requests.post("http://engine:15002/user/getUserByEmail", data=body, headers=headers)
             response = (req.json())
             _code = req.status_code
 
@@ -59,7 +60,7 @@ def login():
 
         headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
         body = json.dumps({'email': _email, 'password': _password})
-        req = requests.post("http://127.0.0.1:15002/user/getUserByEmail", data=body, headers=headers)
+        req = requests.post("http://engine:15002/user/getUserByEmail", data=body, headers=headers)
         response = (req.json())
         _code = req.status_code
         _message = response['message']

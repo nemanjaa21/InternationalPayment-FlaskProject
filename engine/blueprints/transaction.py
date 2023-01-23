@@ -64,6 +64,7 @@ def initTransaction2():
 
     return "Ok"
 
+
 ###############
 #### METODE ###
 ###############
@@ -71,7 +72,7 @@ def initTransaction2():
 def transactionThread(transakcija):
     print('New thread started.')
 
-    sleep(5)
+    sleep(30)
 
     queue.put(transakcija)
 
@@ -89,7 +90,7 @@ def transactionProcess(queue: Queue):
 
         if isinstance(transaction, Transaction1):
             # Online - Online
-            mydb = MySQLdb.connect(host="localhost", user="root", passwd="pass", db="DRS_PROJEKAT", port=9000)
+            mydb = MySQLdb.connect(host="db", user="root", passwd="pass", db="DRS_PROJEKAT", port=3306)
             cursor = mydb.cursor()
             cursor.execute("SELECT * FROM Korisnik WHERE Korisnik.Email = %s", (transaction.sender,))
             _senderUser = cursor.fetchone()
@@ -157,7 +158,7 @@ def transactionProcess(queue: Queue):
 
         elif isinstance(transaction, Transaction2):
             # Online - BankAccount
-            mydb = MySQLdb.connect(host="localhost", user="root", passwd="pass", db="DRS_PROJEKAT", port=9000)
+            mydb = MySQLdb.connect(host="db", user="root", passwd="pass", db="DRS_PROJEKAT", port=3306)
 
             cursor = mydb.cursor()
             cursor.execute("SELECT * FROM Korisnik WHERE Korisnik.Email = %s", (transaction.sender,))
